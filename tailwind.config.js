@@ -5,6 +5,10 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        "bg-dark": "#16181D",
+        "bg-light": "#F9FAFB"
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {

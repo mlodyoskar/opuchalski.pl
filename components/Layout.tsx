@@ -15,9 +15,9 @@ const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
   return (
     <>
       <Head customMeta={customMeta} />
-      <header>
-        <div className="max-w-5xl px-8 mx-auto">
-          <div className="flex items-center justify-between py-6">
+      <header className="sticky top-0 backdrop-filter backdrop-blur-lg z-10">
+        <div className="max-w-5xl px-8 mx-auto ">
+          <div className="flex items-center justify-between py-4">
             <Navigation />
             <ThemeSwitch />
           </div>
@@ -27,15 +27,7 @@ const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
         <div className="max-w-5xl px-8 py-4 mx-auto">{children}</div>
       </main>
       <footer className="py-8">
-        <div className="max-w-5xl px-8 mx-auto">
-          Built by{' '}
-          <a
-            className="text-gray-900 dark:text-white"
-            href="https://twitter.com/hunterhchang"
-          >
-            Hunter Chang
-          </a>
-        </div>
+        <div className="max-w-5xl px-8 mx-auto"></div>
       </footer>
     </>
   );

@@ -3,15 +3,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { MetaProps } from '../types/layout';
 
-export const WEBSITE_HOST_URL = 'https://nextjs-typescript-mdx-blog.vercel.app';
+export const WEBSITE_HOST_URL = 'https://opuchalski.pl';
 
-const Head = ({ customMeta }: { customMeta?: MetaProps }): JSX.Element => {
+const Head = ({ customMeta }: { customMeta?: MetaProps }) => {
   const router = useRouter();
+
   const meta: MetaProps = {
-    title: 'Hunter Chang - Website',
+    title: 'Oskar Puchalski - Blog',
     description:
-      'Sleep Deprived Father. Senior Web Developer. Lover of all things Ramen and Kpop.',
-    image: `${WEBSITE_HOST_URL}/images/site-preview.png`,
+      'Frontend Developer who loves to create things and teach others',
+    image: `${WEBSITE_HOST_URL}/images/preview.png`,
     type: 'website',
     ...customMeta,
   };

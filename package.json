@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-typescript-mdx-blog",
-  "author": "@hunterhchang",
+  "name": "opuchalski.pl",
+  "author": "mlodyoskar",
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
@@ -21,8 +21,8 @@
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "yarn lint",
-      "yarn format"
+      "npm lint",
+      "npm format"
     ]
   },
   "dependencies": {
@@ -34,7 +34,8 @@
     "next-mdx-remote": "^4.1.0",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
