@@ -15,7 +15,7 @@ const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
   return (
     <>
       <Head customMeta={customMeta} />
-      <header className="sticky top-0 backdrop-filter backdrop-blur-lg z-10">
+      <header className="sticky top-0 backdrop-filter backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 z-10">
         <div className="max-w-5xl px-8 mx-auto ">
           <div className="flex items-center justify-between py-4">
             <Navigation />

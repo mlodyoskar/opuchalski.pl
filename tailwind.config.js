@@ -7,7 +7,15 @@ module.exports = {
     extend: {
       colors: {
         "bg-dark": "#16181D",
-        "bg-light": "#F9FAFB"
+        "bg-light": "#F9FAFB",
+        "primary": {
+          100: "#dee7ff",
+          700: "#0035b0",
+          800: "#1D2433",
+        }
+      },
+      boxShadow: {
+        btn: "0 2px 40px -4px",
       },
       typography: (theme) => ({
         DEFAULT: {
