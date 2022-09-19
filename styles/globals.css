@@ -17,6 +17,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Post styles */
 
 .prose .anchor {
@@ -62,6 +66,7 @@
 .prose img {
   /* Don't apply styles to next/image */
   @apply m-0;
+  @apply rounded-xl;
 }
 
 .prose > :first-child {

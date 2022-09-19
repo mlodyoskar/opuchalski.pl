@@ -43,8 +43,8 @@ const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
   };
   return (
     <Layout customMeta={customMeta}>
-      <article>
-        <h1 className="mb-3 text-gray-900 dark:text-white">
+      <article className="flex flex-col items-center">
+        <h1 className="mb-3 text-gray-900 dark:text-white text-4xl text-center">
           {frontMatter.title}
         </h1>
         <p className="mb-10 text-sm text-gray-500 dark:text-gray-400">
@@ -96,9 +96,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = postFilePaths
-    // Remove file extensions for page paths
     .map((path) => path.replace(/\.mdx?$/, ''))
-    // Map the path into the static paths object required by Next.js
     .map((slug) => ({ params: { slug } }));
 
   return {
