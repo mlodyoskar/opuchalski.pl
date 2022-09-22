@@ -15,6 +15,7 @@ type IndexProps = {
 };
 
 export const Index = ({ posts }: IndexProps): JSX.Element => {
+  const featuredPosts = posts.filter((post) => post.featured);
   return (
     <Layout>
       <h1 className="md:text-5xl md:leading-normal">
@@ -32,7 +33,7 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
       </div>
       <section className="mt-16">
         <h2 className="text-3xl">Wybrane posty</h2>
-        <PostsList posts={posts} />
+        <PostsList posts={featuredPosts} />
       </section>
       <section className="mt-16">
         <h2 className="text-3xl">Wszystkie posty</h2>
@@ -58,8 +59,13 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(['date', 'description', 'slug', 'title']);
-
+  const posts = getAllPosts([
+    'date',
+    'description',
+    'slug',
+    'title',
+    'featured',
+  ]);
   return {
     props: { posts },
   };

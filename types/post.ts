@@ -4,4 +4,6 @@ export type PostType = {
   image?: string;
   slug: string;
   title: string;
+  category: 'React' | 'Supabase' | 'CSS' | 'Praca';
+  featured: boolean;
 };
