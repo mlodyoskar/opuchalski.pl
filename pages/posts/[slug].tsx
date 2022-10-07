@@ -17,11 +17,8 @@ import Layout, { WEBSITE_HOST_URL } from '../../components/Layout';
 import { MetaProps } from '../../types/layout';
 import { PostType } from '../../types/post';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
+import readingTime from 'reading-time';
 
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
 const components = {
   Head,
   Image,
@@ -31,20 +28,23 @@ const components = {
 type PostPageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: PostType;
+  timeToRead: number;
 };
 
 const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
   const customMeta: MetaProps = {
-    title: `${frontMatter.title} - Oskar Puchalski 🏀`,
+    title: `${frontMatter.title} - opuchalski.pl`,
     description: frontMatter.description,
     image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
     date: frontMatter.date,
     type: 'article',
   };
+
   return (
     <Layout customMeta={customMeta}>
-      <article className="flex flex-col items-center">
-        <h1 className="mb-3 text-gray-900 dark:text-white text-4xl text-center">
+      <article className="flex flex-col md:items-center">
+        <p>{frontMatter.category}</p>
+        <h1 className="mb-3 text-center text-4xl text-gray-900 dark:text-white">
           {frontMatter.title}
         </h1>
         <p className="mb-10 text-sm text-gray-500 dark:text-gray-400">
@@ -63,6 +63,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const source = fs.readFileSync(postFilePath);
 
   const { content, data } = matter(source);
+
+  const timeToRead = readingTime(content).minutes;
 
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
@@ -90,6 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       source: mdxSource,
       frontMatter: data,
+      timeToRead,
     },
   };
 };
