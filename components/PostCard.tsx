@@ -18,15 +18,15 @@ const PostCard = ({ title, description, slug, iterator = 1 }: Props) => {
     <Link key={slug} href={`/posts/${slug}`}>
       <a className="">
         <article
-          className="hover:scale-[1.01] transform transition-all border-2 dark:border-gray-700 border-gray-300  rounded-xl p-4"
+          className="transform rounded-xl border-2 border-gray-300 p-4 transition-all  hover:scale-[1.01] dark:border-gray-700"
           key={slug}
         >
           <h3
-            className={`mb-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${gradients[iterator]}`}
+            className={`mb-2 bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent ${gradients[iterator]}`}
           >
             {title}
           </h3>
-          <p className="mb-3 text-lg dark:text-white text-gray-900">
+          <p className="mb-3 text-lg text-gray-900 dark:text-white">
             {description}
           </p>
         </article>

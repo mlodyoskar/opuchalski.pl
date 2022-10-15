@@ -5,7 +5,7 @@ const Navigation = () => {
   return (
     <nav>
       <Link href="/">
-        <a className="text-gray-900 dark:text-white pr-6 py-4 text-xl ">
+        <a className="py-4 pr-6 text-xl text-gray-900 dark:text-white ">
           opuchalski.pl
         </a>
       </Link>

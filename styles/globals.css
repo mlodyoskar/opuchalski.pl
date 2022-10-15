@@ -122,7 +122,7 @@ html {
 
 .token.function,
 .token.class-name {
-  @apply text-pink-500;
+  @apply dark:text-[#5CE4C6];
 }
 
 .token.regex,
