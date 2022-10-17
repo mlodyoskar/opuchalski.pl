@@ -9,9 +9,8 @@ const Head = ({ customMeta }: { customMeta?: MetaProps }) => {
   const router = useRouter();
 
   const meta: MetaProps = {
-    title: 'Oskar Puchalski - Blog',
-    description:
-      'Frontend Developer who loves to create things and teach others',
+    title: 'Oskar Puchalski • Blog',
+    description: 'Frontend Developer który lubi tworzyć i uczyć innych!',
     image: `${WEBSITE_HOST_URL}/images/preview.png`,
     type: 'website',
     ...customMeta,
@@ -24,12 +23,12 @@ const Head = ({ customMeta }: { customMeta?: MetaProps }) => {
       <meta property="og:url" content={`${WEBSITE_HOST_URL}${router.asPath}`} />
       <link rel="canonical" href={`${WEBSITE_HOST_URL}${router.asPath}`} />
       <meta property="og:type" content={meta.type} />
-      <meta property="og:site_name" content="Hunter Chang - Website" />
+      <meta property="og:site_name" content="Oskar Puchalski • Blog" />
       <meta property="og:description" content={meta.description} />
       <meta property="og:title" content={meta.title} />
       <meta property="og:image" content={meta.image} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@huntarosan" />
+      <meta name="twitter:site" content="@puchalskioskar" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={meta.image} />
