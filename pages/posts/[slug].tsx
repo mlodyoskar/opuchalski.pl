@@ -43,7 +43,6 @@ const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <p>{frontMatter.category}</p>
         <h1 className="mb-3 text-center text-4xl text-gray-900 dark:text-white">
           {frontMatter.title}
         </h1>
@@ -60,7 +59,7 @@ const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`);
+  const postFilePath = path.join(POSTS_PATH, `${params?.slug}.mdx`);
   const source = fs.readFileSync(postFilePath);
 
   const { content, data } = matter(source);
