@@ -1,10 +1,11 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "jsx-a11y"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "env": {
     "es6": true,
@@ -27,6 +28,7 @@
     "@typescript-eslint/member-delimiter-style": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/no-unused-vars": [
       2,

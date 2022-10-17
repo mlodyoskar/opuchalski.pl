@@ -43,7 +43,7 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
               <Link key={slug} href={`/posts/${slug}`}>
                 <a className="group flex h-14 items-center gap-8 rounded-xl px-1 py-2 transition-all  hover:bg-[#97b6fd1c]">
                   <p className="m-0 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                    {format(parseISO(date), 'dd MMM ', { locale: pl })}
+                    {date && format(parseISO(date), 'dd MMM ', { locale: pl })}
                   </p>
                   <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white">
                     {title}
