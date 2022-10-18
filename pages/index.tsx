@@ -1,20 +1,17 @@
-import { GetStaticProps } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import React from 'react';
 import { Button } from '../components/Button';
 import Layout from '../components/Layout';
 import { getAllPosts } from '../lib/api';
-import { PostType } from '../types/post';
 import { FiArrowUpRight, FiTwitter } from 'react-icons/fi';
 import { PostsList } from '../components/PostsList';
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import pl from 'date-fns/locale/pl';
 
-type IndexProps = {
-  posts: PostType[];
-};
-
-export const Index = ({ posts }: IndexProps): JSX.Element => {
+export const HomePage = ({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const featuredPosts = posts.filter((post) => post.featured);
   return (
     <Layout>
@@ -58,7 +55,7 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = async () => {
   const posts = getAllPosts([
     'date',
     'description',
@@ -71,4 +68,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Index;
+export default HomePage;

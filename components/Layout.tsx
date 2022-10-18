@@ -11,7 +11,7 @@ type LayoutProps = {
 
 export const WEBSITE_HOST_URL = 'https://opuchalski.pl';
 
-const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
+const Layout = ({ children, customMeta }: LayoutProps) => {
   return (
     <>
       <Head customMeta={customMeta} />

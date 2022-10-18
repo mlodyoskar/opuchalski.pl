@@ -31,7 +31,7 @@ type PostPageProps = {
   timeToRead: number;
 };
 
-const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
+const PostPage = ({ source, frontMatter }: PostPageProps) => {
   const customMeta: MetaProps = {
     title: `${frontMatter.title} • opuchalski.pl`,
     description: frontMatter.description,
