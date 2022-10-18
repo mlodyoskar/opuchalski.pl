@@ -3,16 +3,19 @@ import React from 'react';
 import { Button } from '../components/Button';
 import Layout from '../components/Layout';
 import { getAllPosts } from '../lib/api';
-import { FiArrowUpRight, FiTwitter } from 'react-icons/fi';
+import { FiArrowUpRight } from 'react-icons/fi';
 import { PostsList } from '../components/PostsList';
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import pl from 'date-fns/locale/pl';
+import { PostType } from '../types/post';
 
 export const HomePage = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const featuredPosts = posts.filter((post) => post.featured);
+  const featuredPosts = posts.filter(
+    (post) => post.featured
+  ) as unknown as PostType[];
   return (
     <Layout>
       <h1 className="md:text-5xl md:leading-normal">
@@ -23,9 +26,6 @@ export const HomePage = ({
       <div className="flex flex-wrap gap-4">
         <Button link="/about">
           O mnie <FiArrowUpRight size="1.4rem" />
-        </Button>
-        <Button link="/about">
-          @puchalskioskar <FiTwitter size="1.4rem" />
         </Button>
       </div>
       <section className="mt-16">
@@ -39,7 +39,7 @@ export const HomePage = ({
             return (
               <Link key={slug} href={`/posts/${slug}`}>
                 <a className="group flex h-14 items-center gap-8 rounded-xl px-1 py-2 transition-all  hover:bg-[#97b6fd1c]">
-                  <p className="m-0 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <p className="m-0 whitespace-nowrap px-4 text-sm text-gray-500 dark:text-gray-300">
                     {date && format(parseISO(date), 'dd MMM ', { locale: pl })}
                   </p>
                   <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white">

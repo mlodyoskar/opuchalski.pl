@@ -16,19 +16,21 @@ const gradients = [
 const PostCard = ({ title, description, slug, iterator = 1 }: Props) => {
   return (
     <Link key={slug} href={`/posts/${slug}`}>
-      <article
-        className="transform rounded-xl border-2 border-gray-300 p-4 transition-all  hover:scale-[1.01] dark:border-gray-700"
-        key={slug}
-      >
-        <h3
-          className={`mb-2 bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent ${gradients[iterator]}`}
+      <a>
+        <article
+          className="transform rounded-xl border-2 border-gray-300 p-4 transition-all  hover:scale-[1.01] dark:border-gray-700"
+          key={slug}
         >
-          {title}
-        </h3>
-        <p className="mb-3 text-lg text-gray-900 dark:text-white">
-          {description}
-        </p>
-      </article>
+          <h3
+            className={`mb-2 bg-gradient-to-r bg-clip-text text-2xl font-bold text-transparent ${gradients[iterator]}`}
+          >
+            {title}
+          </h3>
+          <p className="mb-3 text-lg text-gray-900 dark:text-white">
+            {description}
+          </p>
+        </article>
+      </a>
     </Link>
   );
 };
