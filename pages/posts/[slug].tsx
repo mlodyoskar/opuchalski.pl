@@ -18,6 +18,7 @@ import { MetaProps } from '../../types/layout';
 import { PostType } from '../../types/post';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 import readingTime from 'reading-time';
+import React from 'react';
 
 const components = {
   Head,
@@ -40,23 +41,28 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
     date: frontMatter.date,
     type: 'article',
   };
-
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <h1 className="mb-3 text-center text-4xl text-gray-900 dark:text-white">
+        <h1 className="mb-6 text-center text-5xl text-gray-900 dark:text-white">
           {frontMatter.title}
         </h1>
-        <p className=" text-center text-sm text-gray-500 dark:text-gray-400">
-          {frontMatter.date &&
-            format(parseISO(frontMatter.date), 'MMMM dd, yyyy')}
-        </p>
+
+        {frontMatter.image && (
+          <Image
+            alt=""
+            className="max-w-3xl rounded-xl"
+            width={650}
+            height={300}
+            src={frontMatter.image}
+          />
+        )}
         <div className="prose dark:prose-dark">
           <MDXRemote {...source} components={components} />
         </div>
-        <div className="mt-8 w-full rounded-lg bg-[#97b6fd1c] dark:bg-gray-800">
+        <div className="mt-8 w-full max-w-2xl rounded-lg bg-[#97b6fd1c] dark:bg-gray-800">
           <p className="m-0 p-4 text-center text-xl ">
-            Znalazłeś gdzieś błąd lub literówkę? Napisz do mnie, albo{' '}
+            Znalazłeś gdzieś błąd lub literówkę? <br></br> Napisz do mnie, albo{' '}
             <a
               href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
               className="font-bold text-[#5686F5]  "
@@ -72,9 +78,7 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postFilePath = path.join(POSTS_PATH, `${params?.slug}.mdx`);
-
   const source = fs.readFileSync(postFilePath);
-
   const { content, data } = matter(source);
 
   const timeToRead = readingTime(content).minutes;

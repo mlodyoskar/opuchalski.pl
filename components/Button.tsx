@@ -11,10 +11,11 @@ const buttonStyles =
 const Button = ({ children, link }: Props) => {
   if (link) {
     return (
-      <Link href={link}>
-        <a className="flex max-w-fit items-center  gap-2 whitespace-nowrap  rounded bg-primary-100  py-2 px-4 text-lg text-[#5686F5] transition-shadow duration-500 hover:shadow-btn hover:shadow-primary-700 dark:border-0 dark:bg-primary-800 md:px-4">
-          {children}
-        </a>
+      <Link
+        href={link}
+        className="flex max-w-fit items-center  gap-2 whitespace-nowrap  rounded bg-primary-100  py-2 px-4 text-lg text-[#5686F5] transition-shadow duration-500 hover:shadow-btn hover:shadow-primary-700 dark:border-0 dark:bg-primary-800 md:px-4"
+      >
+        {children}
       </Link>
     );
   } else {

@@ -7,38 +7,30 @@ export function getPostSlugs(): string[] {
   return fs.readdirSync(POSTS_PATH);
 }
 
-type PostItems = {
-  [key: string]: string;
-};
+interface FrontMatter {
+  title: string;
+  description: string;
+  date: string;
+  image: string;
+  featured: boolean;
+  slug: string;
+}
 
-export function getPostBySlug(slug: string, fields: string[] = []): PostItems {
+export function getPostBySlug(slug: string) {
   const realSlug = slug.replace(/\.mdx$/, '');
   const fullPath = join(POSTS_PATH, `${realSlug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
+  const { data } = matter(fileContents);
+  const frontMatter = { ...data, slug: realSlug } as unknown;
 
-  const items: PostItems = {};
-
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === 'slug') {
-      items[field] = realSlug;
-    }
-    if (field === 'content') {
-      items[field] = content;
-    }
-    if (data[field]) {
-      items[field] = data[field];
-    }
-  });
-
-  return items;
+  return frontMatter as FrontMatter;
 }
 
-export function getAllPosts(fields: string[] = []): PostItems[] {
+export function getAllPosts() {
   const slugs = getPostSlugs();
+
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }
