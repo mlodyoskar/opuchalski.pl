@@ -29,7 +29,7 @@ type PostPageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: PostType;
   slug: string;
-  timeToRead: number;
+  timeToRead: numbesr;
 };
 
 const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
