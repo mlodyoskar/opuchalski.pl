@@ -11,7 +11,7 @@ type LayoutProps = {
 
 export const WEBSITE_HOST_URL = 'https://opuchalski.pl';
 
-const Layout = ({ children, customMeta }: LayoutProps) => {
+export const Layout = ({ children, customMeta }: LayoutProps) => {
   return (
     <>
       <Head customMeta={customMeta} />
@@ -32,5 +32,3 @@ const Layout = ({ children, customMeta }: LayoutProps) => {
     </>
   );
 };
-
-export default Layout;

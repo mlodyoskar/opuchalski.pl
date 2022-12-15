@@ -12,12 +12,13 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-import Layout, { WEBSITE_HOST_URL } from '../../components/Layout';
+import { Layout, WEBSITE_HOST_URL } from '../../components/Layout';
 import { MetaProps } from '../../types/layout';
 import { PostType } from '../../types/post';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 import readingTime from 'reading-time';
 import React from 'react';
+import { Card } from '../../components/Card';
 
 const components = {
   Head,
@@ -29,7 +30,7 @@ type PostPageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: PostType;
   slug: string;
-  timeToRead: numbesr;
+  timeToRead: number;
 };
 
 const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
@@ -43,33 +44,34 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <h1 className="mb-6 text-center text-5xl text-gray-900 dark:text-white">
+        <h1 className="mb-6 text-center text-gray-900 dark:text-white md:text-5xl">
           {frontMatter.title}
         </h1>
 
         {frontMatter.image && (
           <Image
             alt=""
-            className="max-w-3xl rounded-xl"
+            className=" md-max-w-3xl rounded-xl"
             width={650}
             height={300}
             src={frontMatter.image}
           />
         )}
-        <div className="prose dark:prose-dark">
+        <div className="prose mb-4 dark:prose-dark">
           <MDXRemote {...source} components={components} />
         </div>
-        <div className="mt-8 w-full max-w-2xl rounded-lg bg-[#97b6fd1c] dark:bg-gray-800">
-          <p className="m-0 p-4 text-center text-xl ">
-            Znalazłeś gdzieś błąd lub literówkę? <br></br> Napisz do mnie, albo{' '}
+        <Card>
+          <p className="m-0 text-lg">
+            Znalazłeś gdzieś błąd lub literówkę? <br></br> Napisz do mnie, albo
+            zrób PR na{' '}
             <a
               href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
               className="font-bold text-[#5686F5]  "
             >
-              zrób PR na GitHubie!
+              GitHubie!
             </a>
           </p>
-        </div>
+        </Card>
       </article>
     </Layout>
   );
