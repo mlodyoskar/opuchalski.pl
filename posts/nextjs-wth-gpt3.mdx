@@ -1,0 +1,309 @@
+---
+title: Tworzenie pomysłów na aplikacje z użyciem GPT-3 i Next.js
+description: Wykorzystanie GPT-3 oraz Next.js do generowania kreatywnych pomysłów na aplikację.
+date: '2023-01-31'
+image: '/images/nextjs-with-gpt3/nextjs-with-gpt3.jpg'
+category: 'React'
+featured: true
+---
+
+## Tworzenie pomysłów na aplikację
+
+Często na grupach facebook'owych czy na kanałach Discord widzę pytania typu _"Jaką aplikację napisać w React"_.
+
+Z racji, że ostatnio testowałem trochę GPT-3, wpadłem na pomysł, że napiszę aplikację, która na podstawie podanych parametrów, wygeneruje pomysł na aplikację!
+
+## Czym jest GPT-3?
+
+Zanim jednak przejdziemy do samego kodu pogadajmy o teorii.
+
+Zakładam że wiesz czym jest Next.js, ale przybliżę Ci w skrócie czym jest "nowość" od OpenAI.
+
+GPT-3 (Generative Pre-trained Transformer 3) to jeden z największych modeli językowych stworzonych przez OpenAI, posiadający 175 miliardów parametrów. Jest on w stanie generować naturalny język na różne tematy, a także rozwiązywać różne zadania językowe, takie jak tłumaczenie, generowanie opisów, rozumienie pytań i odpowiedzi itp. (wygenerowane przez ChatGPT)
+
+Tutaj przykładowe pytanie i odpowiedź:
+
+Pytanie: **"Jakie zwierzęta mieszkają w Afryce?"**
+
+Odpowiedź: **"W Afryce można spotkać wiele różnych zwierząt, takich jak: słonie, lwy, gepardy, antylopy, nosorożce, bawoły, hipopotamy, zebrę, krokodyle, flamingi, i wiele innych."**
+
+## Przykład wykorzystania GPT-3
+
+Pora na przejście do mięsa, czyli wykorzystanie GPT-3 na froncie poprzez spięcie naszego frontu z API wystawianym przez OpenAI.
+
+W naszym przypadku skorzystamy z udostępnionej przez nich biblioteki, ponieważ jest napisana w 100% w TypeScriptcie, co zapewni nam autouzupełnianie i bezpieczeństwo typów.
+
+### Setup projektu
+
+Setup zaczniemy od postawienia aplikacji reactowej w oparciu o framework Next.js. Następnie zainstalujemy paczkę o nazwie `openai`
+
+Ja wykorzystam do tego `pnpm`, ale możesz użyć dowolnego menedżera pakietów (np. `npm` czy `yarn`)
+
+```bash
+pnpm create next-app nextjs-with-openai
+cd nextjs-with-openai
+pnpm install openai
+pnpm run dev
+```
+
+Mamy już zainicjalizowany projekt oraz zainstalowane potrzebne paczki, przejdźmy do sedna.
+
+### Strona do tworzenia zapytań i wyświetlania wyników
+
+Zaczniemy od strony frontu, gdzie stworzymy formularz, do którego będziemy wprowadzać wartości do formularza oraz pokazywać wyniki. Nie będę się skupiał teraz na wyglądzie aplikacji, ale w wersji demo będą one zawarte.
+
+Tak wygląda przygotowana strona z formularzem i miejscem do wyświetlania wyników:
+
+```tsx:pages/index.tsx
+import React, { useState } from 'react'
+
+export default function Home() {
+  const [interests, setInterests] = useState('')
+  const [results, setResults] = useState('')
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    ...tutaj zapytanie do naszego API Route
+  }
+
+  return (
+    <main>
+      <form onSubmit={onSubmit}>
+        <label>
+          Twoje zainteresowania
+          <input
+            name="interests"
+            onChange={(e) => setInterests(e.currentTarget.value)}
+          />
+        </label>
+        <button>Wyślij</button>
+      </form>
+      <p>{results}</p>
+    </main>
+  )
+}
+```
+
+### API Route do obsługi zapytań
+
+Teraz pora stworzyć nasz API Route, do którego będzie wysyłać zapytania, na podstawie których będziemy dostawali odpowiedzi z API OpenAI.
+
+Ale może, zanim przejdziemy bezpośrednio do tego odpowiedzmy na pytanie czemu nie będziemy wykonywać tych zapytań po stronie frontu, przecież moglibyśmy!
+
+Myślę, że jedną z najważniejszych rzeczy jest fakt, że do wykonywania requestów do API GPT-3 potrzebny nam jest token, a wykonując nasze requesty z frontu, każdy mógłby przeczytać nasz token i wykorzystać go do wykonywania zapytań.
+
+Moglibyśmy pomyśleć, że to nic wielkiego, ale ilość bezpłatnych zapytań jest limitowana, także warto go ukryć.
+
+Tak może wyglądać nasz przykładowy API Route:
+
+```ts:pages/api/generate-idea.ts
+import type { NextApiHandler } from "next";
+import { Configuration, OpenAIApi } from "openai";
+
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+if (!OPENAI_API_KEY) {
+ throw new Error("Nie podano zmiennej środowiskowej OPENAI_API_KEY");
+}
+
+const configuration = new Configuration({
+ apiKey: OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
+
+
+const handler: NextApiHandler = async (req, res) => {
+ if (req.method !== "POST") {
+  res.status(405).json({ error: "Method not allowed" });
+ }
+
+ const completion = await openai.createCompletion({
+  model: "text-davinci-003",
+  prompt: ...tu będzie nasze zapytanie do GPT-3,,
+  temperature: 0.9,
+  max_tokens: 500,
+ });
+
+ res.status(200).json({ result: ...tu będziemy zwracać dane });
+};
+
+export default handler;
+
+```
+
+Przejdźmy sobie krok po kroku co tu się dzieje.
+
+Najpierw importujemy dwie klasy z biblioteki `openai`, które służą nam do stworzenia konfiguracji oraz do zainicjalizowania obiektu, który dostarczy nam metody do współpracy z GPT-3.
+
+Dalej odczytujemy zmienną środowsikową o nazwie `OPENAI_API_KEY`, to właśnie nasz klucz dzięki któremu możemy wykonywać zapytania.
+Trzymamy go jako zmienną, aby nie można było jej odczytać w kodzie, oraz mając w głowie, że jest to wartość, która może zmieniać się w zależności od środowiska.
+
+Dalej sprawdzamy, czy takowa zmienna środowiskowa w ogóle została ustawiona, w innym przypadku wyrzucamy błąd. W ten sposób szybko dowiemy się o tym, że zapomnieliśmy ją ustawić.
+
+Następnie tworzymy obiekt z konfiguracją, do którego przekazujemy nasz klucz oraz obiekt, który dostarcza nam potrzebne metody, my wykorzystamy akurat tylko jedną: `createCompletion`
+
+Najwyższa pora na napisanie handlera i tego, co się w nim dzieje.
+
+```ts
+const completion = await openai.createCompletion({
+  model: "text-davinci-003",
+  prompt: ... tu będzie nasze zapytanie do GPT-3,
+  temperature: 0.9,
+  max_tokens: 500,
+ });
+```
+
+Wywołujemy metodę `createCompletion`, do której przekazujemy obiekt z opcjami. Wybieramy model o nazwie **_text-davinci-003_**,
+jest to najmocniejszy model, ale jest też najdroższy.
+
+Ustawiamy parametr `temperature` na wartość 0.9.
+Od tego zależy jak "kreatywna" i losowa będzie odpowiedź modelu. Jak nazwa wskazuje `max_tokens` to maksymalna
+ilość tokenów, jaka może zostać "zapłacona" w ramach jednego requesta.
+
+Sprawdziłem, czy model **_text-curie-001_**, czyli o jeden rząd słabszy sobie poradzi, niestety, zamiast podać pomysł na aplikację,
+postanowił że opisze już istniejącą.
+Więcej o modelach i ich cenach możesz przeczytać [tutaj](https://openai.com/api/pricing/).
+
+Na samym końcu zwracamy odpowiedź z kodem 200, oraz exporrtujemy handler.
+
+### Generowanie prompta
+
+Nadszedł czas na najważniejszą część, czyli odpowiednie skomponowanie naszego **prompta**, czyli tekstu,
+na podstawie którego GPT-3 będzie generować dla nas odpowiedzi. W naszym przypadku pomysł na aplikację webową!
+
+Metod na pisanie promptów jest sporo i w zależności jak je skonstruujemy możemy otrzymać bardziej satysfakcjonującą odpowiedź lub mniej.
+Dla nas najważniejsze jest, aby podać _szczegóły_ odnośnie pomysłu na aplikację, oraz _kontekst_. Na potrzeby tego wpisu założę że pomysł na aplikację jest dla osoby początkującej.
+
+Istnieje wiele metod tworzenia promptów, a jakość otrzymanej odpowiedzi zależy od ich konstrukcji.
+Dla nas najważniejsze jest, aby podać szczegóły dotyczące pomysłu na aplikację oraz kontekst.
+
+Z pomocą GPT-3 wymyśliłem taki prompt (tak, GPT-3 świetnie generuje prompty):
+
+```
+Jesteś początkującym programistą aplikacji webowych i masz
+pomysł na stworzenie aplikacji, która odpowiada Twoim zainteresowaniom.
+Proszę o opisanie tej aplikacji w maksymalnie 250 znakach,
+uwzględniając jej główne funkcje i cel.
+Twoje zainteresowania to ...zainteresowania z formularza.
+```
+
+Pierwsze zdanie pełni rolę nadania kontekstu. Jak widzisz nadajemy naszemu modelowi osobowość, przez co uzyskamy dokładniejszą odpowiedź.
+Następnie piszemy, co ma dla nas zrobić model, a na końcu podajemy nasze zainteresowania.
+
+Mamy template promptu, stwórzmy prostą funkcję, która uzupełni ten template naszymi zainteresowanimi i użyjmy jej do wygenerowania polecenia dla GPT-3.
+
+Tak wygląda końcowa wersja naszego API Route.
+
+```ts:pages/api/generate-idea.ts
+import type { NextApiHandler } from "next";
+import { Configuration, OpenAIApi } from "openai";
+
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+if (!OPENAI_API_KEY) {
+ throw new Error("Nie podano zmiennej środowiskowej OPENAI_API_KEY");
+}
+
+const configuration = new Configuration({
+ apiKey: OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
+
+const generatePrompt = (interests: string) => {
+ return `Jesteś początkującym programistą aplikacji webowych i masz
+    pomysł na stworzenie aplikacji, która odpowiada Twoim zainteresowaniom.
+    Proszę o opisanie tej aplikacji w maksymalnie 250 znakach,
+    uwzględniając jej główne funkcje i cel.
+    Twoje zainteresowania to ${interests}.`;
+};
+
+const handler: NextApiHandler = async (req, res) => {
+ const prompt = generatePrompt(req.body.interests);
+
+ const completion = await openai.createCompletion({
+  model: "text-davinci-003",
+  prompt: prompt,
+  temperature: 0.9,
+  max_tokens: 500,
+ });
+
+ res.status(200).json({ result: completion.data.choices[0].text });
+};
+
+export default handler;
+
+```
+
+Możemy teraz wrócić na front i wysłać na nasz endpoint zapytanie o pomysł na aplikację!
+
+### Wysyłanie requesta i wyświetlanie odpowiedzi
+
+Pozostało nam zmienić tylko to, co dzieje się w funkcji `onSubmit`.
+
+Tak wygląda teraz ta funkcja:
+
+```ts
+const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const res = await fetch('/api/generate-idea', {
+    method: 'POST',
+    body: JSON.stringify({ interests }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const data = await res.json();
+  setResults(data.result);
+};
+```
+
+Ponownie przejdźmy krok po kroku i zobaczmy co tu się dzieję.
+
+Najpierw z pomocą `e.preventDefault()` zapobiegamy domyślnemu zachowaniu wysyłania formularza, w tym odświeżeniu strony.
+
+Następnie najważniejsza rzecz czyli z pomocą `fetch` wysyłamy request metodą `POST`,
+w body wysyłamy string z naszymi zainteresowaniami z formularza
+i na końcu ustawiamy `Content-Type`, tak aby nasz API Route wiedział, jak dane sparsować.
+
+W tym momencie pozostała nam do zrobienia ostatnia rzecz. Musimy ustawić zmienną środowiskową z API_KEY do OpenAI.
+
+Tworzymy zatem plik `env.local` w głównym katalogu i uzupełniamy go naszym kluczem. Swój klucz możesz utworzyć [tutaj](https://platform.openai.com/account/api-keys).
+
+```txt:env.local
+OPENAI_API_KEY=sk-hzpBUmdH3m5...UzbOM56dJhQTO
+```
+
+## Efekty naszej pracy
+
+Najwyższa pora sprawdzić, czy otrzymamy wynik i czy będzie on pasował do naszych wymagań.
+
+Wpisuje w takim razie w formularzu, że moim zainteresowaniem jest **wspinaczka**.
+
+Wynik jaki otrzymałem:
+
+**"Moją aplikacją będzie strona do wspinaczki górskiej,
+pozwalająca użytkownikom planować wyprawy, przeglądać trasy i podzielić się relacjami ze swoich wypraw.
+Użytkownicy będą mogli wyszukiwać trasy, oceniać innych wspinaczy,
+porównywać swoje postępy oraz uzyskać dostęp do aktualnych prognoz pogody."**
+
+Myślę, że brzmi to całkiem nieźle, spróbujmy czegoś innego.
+
+Teraz podałem, że moimi zainteresowaniami są **koszykówka** i **podcasty**.
+Zauważ, że podcasty to bardzo ogólna rzecz, mimo to, odpowiedź uważam za satysfakcjonująca:
+
+**"Moja aplikacja mobilna „Kosz” to idealne narzędzie dla pasjonatów koszykówki.
+Zawiera statystyki, wywiady z liderami zespołu,
+podcasty z najnowszymi wiadomościami dotyczącymi koszykówki,
+jak również elementy społecznościowe pozwalające użytkownikom na dzielenie się swoją pasją.
+"**
+
+Jedyne co to nazwa dla aplikacji moim zdaniem nie jest zbyt trafna 🗑️.
+
+## Podsumowanie
+
+Mam nadzieję, że zainspirowałem Cię do próby wykorzystania GPT-3 w Twoim następnym projekcie.
+Takie "kreatywne" generowanie treści to tylko bardzo mała część możliwości tego narzędzia,
+jeśli chcesz sprawdzić co jeszcze potrafi zajrzyj [tuutaj](https://platform.openai.com/examples/).
+
+Kod źródłowy z tego posta znajdziesz na [GitHubie](https://github.com/mlodyoskar/nextjs-with-gpt3).

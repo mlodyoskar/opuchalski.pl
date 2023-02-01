@@ -37,14 +37,15 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
   const customMeta: MetaProps = {
     title: `${frontMatter.title} • opuchalski.pl`,
     description: frontMatter.description,
-    image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
+    image: `${WEBSITE_HOST_URL}/${slug}/opengraph.png`,
     date: frontMatter.date,
     type: 'article',
   };
+
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <h1 className="mb-6 text-center text-gray-900 dark:text-white md:text-5xl">
+        <h1 className="mb-6 text-center text-gray-900  dark:text-white  md:text-5xl md:leading-snug">
           {frontMatter.title}
         </h1>
 
