@@ -20,18 +20,14 @@ export const HomePage = ({
     <Layout>
       <h1 className="md:text-5xl md:leading-normal">
         Cześć, tu Oskar 👋 <br></br> Witaj na moim blogu. Znajdziesz tu
-        informacje na tematy zarówno frontendowe, jaki i backendowe oraz tematy
-        wokoło programistyczne
+        informacje na temat programowania webowego i innych ciekawych rzeczy!
       </h1>
       <div className="flex flex-wrap gap-4">
         <Button link="/about">
           O mnie <FiArrowUpRight size="1.4rem" />
         </Button>
       </div>
-      <p className="mt-40 text-center text-2xl">
-        Strona jest w trakcie budowy. Stay tuned 😁
-      </p>
-      {/* {featuredPosts.length >= 1 && (
+      {featuredPosts.length >= 1 && (
         <section className="mt-16">
           <h2 className="text-3xl">Wybrane posty</h2>
           <PostsList posts={featuredPosts} />
@@ -58,8 +54,8 @@ export const HomePage = ({
               );
             })}
           </div>
-        </section> */}
-      {/* )} */}
+        </section>
+      )}
     </Layout>
   );
 };

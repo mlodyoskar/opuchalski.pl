@@ -20,19 +20,10 @@ const AboutPage = () => {
             wiedzę i to właśnie z tego powodu powstał ten blog!
           </p>
           <p>
-            Poza kodowaniem lubię uprawiać sport jak koszykówka czy wspinaczka.
+            Poza kodowaniem wspinam się po ścianach i biegam po centrum Poznania
+            🧗🏃
           </p>
-          <p>
-            Współtworzę projekt{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/puchaczlabel/"
-            >
-              @puchaczlabel
-            </a>{' '}
-            🦉
-          </p>
+
           <p>Wpadnij na moje sociale 👇</p>
           <SocialLinks />
         </div>
