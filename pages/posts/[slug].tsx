@@ -37,7 +37,7 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
   const customMeta: MetaProps = {
     title: `${frontMatter.title} • opuchalski.pl`,
     description: frontMatter.description,
-    image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
+    image: `${WEBSITE_HOST_URL}/${frontMatter.slug}/opengraph.png`,
     date: frontMatter.date,
     type: 'article',
   };
