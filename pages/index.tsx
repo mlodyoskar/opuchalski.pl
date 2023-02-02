@@ -18,7 +18,7 @@ export const HomePage = ({
   ) as unknown as PostType[];
   return (
     <Layout>
-      <h1 className="md:text-5xl md:leading-normal">
+      <h1 className="text-4xl md:text-5xl md:leading-normal">
         Cześć, tu Oskar 👋 <br></br> Witaj na moim blogu. Znajdziesz tu
         informacje na temat programowania webowego i innych ciekawych rzeczy!
       </h1>
@@ -42,12 +42,16 @@ export const HomePage = ({
                 <Link
                   key={slug}
                   href={`/posts/${slug}`}
-                  className="md-gap-8 group flex h-14 items-center rounded-xl px-1 py-2 transition-all  hover:bg-[#97b6fd1c]"
+                  className="md-gap-8 group flex flex-col rounded-xl px-1 py-2 transition-all hover:bg-[#97b6fd1c] sm:flex-row  sm:items-center"
                 >
-                  <p className="m-0 whitespace-nowrap px-4 text-sm text-gray-500 dark:text-gray-300">
+                  <p className="m-0 hidden whitespace-nowrap px-4 text-sm text-gray-500 dark:text-gray-300 sm:block">
                     {date && format(parseISO(date), 'dd MMM ', { locale: pl })}
                   </p>
-                  <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white">
+                  <p className="m-0 whitespace-nowrap  text-sm text-gray-500 dark:text-gray-300 sm:hidden">
+                    {date &&
+                      format(parseISO(date), 'dd MMMM yyyy ', { locale: pl })}
+                  </p>
+                  <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white sm:px-0">
                     {title}
                   </p>
                 </Link>

@@ -16,8 +16,11 @@ const AboutPage = () => {
         <div className=" text-lg  md:w-1/2">
           <p>
             Siemka, dobrze Cię tu widzieć! Mam na imię Oskar i staram się
-            tworzyć oprogramowanie które pomaga innym. Lubię przekazywać zdobytą
-            wiedzę i to właśnie z tego powodu powstał ten blog!
+            tworzyć oprogramowanie które pomaga innym.
+          </p>
+          <p>
+            Lubię przekazywać zdobytą wiedzę i to właśnie z tego powodu powstał
+            ten blog!
           </p>
           <p>
             Poza kodowaniem wspinam się po ścianach i biegam po centrum Poznania
