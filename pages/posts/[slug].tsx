@@ -45,20 +45,20 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <h1 className="mb-6 text-center text-gray-900  dark:text-white  md:text-5xl md:leading-snug">
+        <h1 className="mb-6 text-center text-4xl  leading-tight  text-gray-900 dark:text-white sm:text-5xl">
           {frontMatter.title}
         </h1>
 
         {frontMatter.image && (
           <Image
             alt=""
-            className=" md-max-w-3xl rounded-xl"
-            width={650}
-            height={300}
+            className="rounded-xl"
+            width={700}
+            height={400}
             src={frontMatter.image}
           />
         )}
-        <div className="prose mb-4 dark:prose-dark">
+        <div className="prose prose-lg mb-4 max-w-[700px] dark:prose-dark">
           <MDXRemote {...source} components={components} />
         </div>
         <Card>
