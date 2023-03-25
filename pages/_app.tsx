@@ -1,6 +1,5 @@
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
-import { Analytics } from '@vercel/analytics/react';
 import '../styles/globals.css';
 import { useEffect } from 'react';
 import Router from 'next/router';
@@ -28,7 +27,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider attribute="class" enableSystem={true} defaultTheme="dark">
         <Component {...pageProps} />
       </ThemeProvider>
-      <Analytics />
     </>
   );
 };
