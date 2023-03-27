@@ -10,7 +10,7 @@ Angażowanie się w projekty open source to doskonały sposób na rozwijanie umi
 
 Co więcej, praca nad projektami open source może pomóc Ci w znalezieniu wymarzonej pracy w branży!
 
-W tym artykule znajdziesz dlaczego warto i jak zacząć kontrybuować do open source, ale najpierw może powiedzmy sobie czym jest ten cały “open source”.
+W tym artykule znajdziesz, dlaczego warto i jak zacząć kontrybuować do open source, ale najpierw może powiedzmy sobie, czym jest ten cały “open source”.
 
 ## Czym jest open source?
 
@@ -42,7 +42,7 @@ Załóżmy że znalazłeś już projekt oraz repozytorium w którym znajduje si�
 
 Na samym początku musisz zrobić “forka” repozytorium. Fork to kopia istniejącego repozytorium, która jest “odczepiona” od oryginalnego repozytorium.
 
-Nie można tej kopii zrobić za pomocą polecenia “git clone”, ponieważ wtedy kopia jest wciąż ściśle powiązana z oryginalnym repozytorium, a próby pchania zmian najprawdopodobniej zakończyłyby się błędem o braku uprawnień. Jest to logiczne, mimo że tworzymy otwarte oprogramowanie nie oznacza to że chcemy, aby każdy mógł do niego dodawać swoje zmiany bez naszego zatwierdzenia.
+Nie można tej kopii zrobić za pomocą polecenia “git clone”, ponieważ wtedy kopia jest wciąż ściśle powiązana z oryginalnym repozytorium, a próby pchania zmian najprawdopodobniej zakończyłyby się błędem o braku uprawnień. Jest to logiczne, mimo że tworzymy otwarte oprogramowanie nie oznacza to, że chcemy, aby każdy mógł do niego dodawać swoje zmiany bez naszego zatwierdzenia.
 
 Aby zrobić fork’a przechodzimy na GitHub’ie na stronę repozytorium i klikamy przycisk Fork. Od teraz kopia repozytorium znajduje się wsród twoich repozytorium, nie jest ona już połączona z oryginalnym repozytorium.
 
@@ -62,7 +62,7 @@ Zwróć jednak uwagę na konwencje nazywania gałęzi w projekcie, najpierw posz
 
 Najpierw jednak musimy te zmiany wysłać do naszego repo. Dodajemy zatem pliki na staging area przy pomocy `git add <nazwa pliku>` lub też jeśli chcemy dodać wszystkie pliki które zmieniliśmy to `git add .` a następne `git commit -m "<tutaj wiadomość co zostało zmienione>"`. Tak naprawdę to co wpiszemy jako wiadomość do commit’a zależy od umowy w projekcie, czasami będzie to numer ticketa z jakiegoś zewnętrznego programu do zarządzania zadaniami, czasami numer Issue z GitHub’a. Zobacz też czy w projekcie używane są [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), jeśli tak to zastosuj się do nich.
 
-Nie zmienia to faktu że napisanie w commit message co zostało zmienione to dobra praktyka. Na sam koniec wysyłamy commit na repo przy pomocy `git push`.
+Nie zmienia to faktu, że napisanie w commit message co zostało zmienione to dobra praktyka. Na sam koniec wysyłamy commit na repo przy pomocy `git push`.
 
 ### 4. Pull request
 
@@ -74,7 +74,7 @@ Po kliknięciu w przycisk powinniśmy zostać przeniesieni na stronę “Open a 
 
 Kolejna rzecz to ustawienie nazwy Pull Request’a, to też może zależeć od konwencji w projekcie, także jak w pierwszym kroku zapoznaj się z nimi, ale zazwyczaj w nazwie PR krótko opisujesz co on wnosi.
 
-Została ostatnia rzecz zanim będziemy mogli kliknąć wyczekiwany zielony przycisk.
+Została ostatnia rzecz, zanim będziemy mogli kliknąć wyczekiwany zielony przycisk.
 
 Jest to dodanie opisu do naszego PR. Jeśli projekt na GitHubie ma to skonfigurowane to pojawi się template do uzupełnienia, jeśli nie to też zaczerpnijmy wiedzy co tam napisać z pliku o tym jak kontrybuować oraz podglądając PR innych. Dobrą zasadą jednak jest opisanie nieco bardziej szczegółowo co zostało zmienione, np. w liście punktowanej. Jeśli była to zmiana w interfejsie możesz umieścić screena interfejsu po zmianie, jeśli została dodana animacja, to zamieść krótki filmik.
 
