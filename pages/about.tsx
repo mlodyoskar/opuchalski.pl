@@ -11,33 +11,34 @@ const AboutPage = () => {
           'O mnie - czyli dowiedz się trochę więcej czym się zajmuje',
       }}
     >
-      <h1 className="text-3xl">O mnie</h1>
       <section className="flex flex-col justify-between gap-4 md:flex-row">
         <div className=" text-lg  md:w-1/2">
+          <h1 className="text-3xl">O mnie</h1>
+          <p>Siemka, dobrze Cię tu widzieć! 👋</p>
           <p>
-            Siemka, dobrze Cię tu widzieć! Mam na imię Oskar i staram się
-            tworzyć oprogramowanie które pomaga innym. Lubię przekazywać zdobytą
-            wiedzę i to właśnie z tego powodu powstał ten blog!
+            Mam na imię Oskar i staram się tworzyć oprogramowanie które pomaga
+            innym.
           </p>
           <p>
-            Poza kodowaniem lubię uprawiać sport jak koszykówka czy wspinaczka.
+            Lubię przekazywać zdobytą wiedzę i to właśnie z tego powodu powstał
+            ten blog!
           </p>
           <p>
-            Współtworzę projekt{' '}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/puchaczlabel/"
-            >
-              @puchaczlabel
-            </a>{' '}
-            🦉
+            Poza kodowaniem wspinam się po ścianach i biegam po centrum Poznania
+            🧗🏃
           </p>
+
           <p>Wpadnij na moje sociale 👇</p>
           <SocialLinks />
         </div>
         <div className="">
-          <Image alt="" width="300" height="200" src="/images/about.jpeg" />
+          <Image
+            alt="Oskar climbing a wall"
+            width={420}
+            height={200}
+            src="/images/about.jpeg"
+            className="rounded-md"
+          />
         </div>
       </section>
     </Layout>

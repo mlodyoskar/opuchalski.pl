@@ -37,41 +37,44 @@ const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
   const customMeta: MetaProps = {
     title: `${frontMatter.title} • opuchalski.pl`,
     description: frontMatter.description,
-    image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
+    image: `${WEBSITE_HOST_URL}/images/${slug}/opengraph.png`,
     date: frontMatter.date,
     type: 'article',
   };
+
   return (
     <Layout customMeta={customMeta}>
       <article className="flex flex-col md:items-center">
-        <h1 className="mb-6 text-center text-gray-900 dark:text-white md:text-5xl">
+        <h1 className="mb-6 text-center text-4xl leading-tight text-gray-900 dark:text-white sm:text-5xl sm:leading-tight">
           {frontMatter.title}
         </h1>
 
         {frontMatter.image && (
           <Image
             alt=""
-            className=" md-max-w-3xl rounded-xl"
-            width={650}
-            height={300}
+            className="rounded-xl"
+            width={700}
+            height={400}
             src={frontMatter.image}
           />
         )}
-        <div className="prose mb-4 dark:prose-dark">
+        <div className="prose prose-lg mb-4 max-w-[700px] dark:prose-dark">
           <MDXRemote {...source} components={components} />
         </div>
-        <Card>
-          <p className="m-0 text-lg">
-            Znalazłeś gdzieś błąd lub literówkę? <br></br> Napisz do mnie, albo
-            zrób PR na{' '}
-            <a
-              href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
-              className="font-bold text-[#5686F5]  "
-            >
-              GitHubie!
-            </a>
-          </p>
-        </Card>
+        <footer className="w-full max-w-[700px]">
+          <Card>
+            <p className="m-0 text-xl">
+              Znalazłeś błąd lub literówkę? <br></br> Napisz do mnie, albo zrób
+              PR na{' '}
+              <a
+                href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
+                className="font-bold"
+              >
+                GitHubie!
+              </a>
+            </p>
+          </Card>
+        </footer>
       </article>
     </Layout>
   );

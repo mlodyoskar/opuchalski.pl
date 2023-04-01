@@ -30,6 +30,8 @@ module.exports = {
             },
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32],
+              color: theme('colors.blue.500'),
+
             },
             code: { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
@@ -51,7 +53,7 @@ module.exports = {
               color: theme('colors.gray.300'),
             },
             'h2,h3,h4': {
-              color: theme('colors.gray.100'),
+              color: theme('colors.blue.500'),
               'scroll-margin-top': spacing[32],
             },
             hr: { borderColor: theme('colors.gray.700') },

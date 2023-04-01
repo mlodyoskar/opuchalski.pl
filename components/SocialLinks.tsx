@@ -35,16 +35,10 @@ const socialLinksData: SocialLinksData[] = [
 export const SocialLinks = () => {
   return (
     <div className="flex gap-6">
-      {socialLinksData.map(({ href, icon: Icon, label }: SocialLinksData) => (
-        <a
-          className="text-red-400"
-          key={label}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      {socialLinksData.map(({ href, icon: Icon, label }) => (
+        <a key={label} href={href} target="_blank" rel="noopener noreferrer">
           <span className="sr-only">{label}</span>
-          <Icon className=" fill-current" />
+          <Icon className="fill-blue-500 hover:fill-blue-600" />
         </a>
       ))}
     </div>

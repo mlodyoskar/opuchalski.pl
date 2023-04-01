@@ -18,20 +18,16 @@ export const HomePage = ({
   ) as unknown as PostType[];
   return (
     <Layout>
-      <h1 className="md:text-5xl md:leading-normal">
+      <h1 className="text-4xl md:text-5xl md:leading-normal">
         Cześć, tu Oskar 👋 <br></br> Witaj na moim blogu. Znajdziesz tu
-        informacje na tematy zarówno frontendowe, jaki i backendowe oraz tematy
-        wokoło programistyczne
+        informacje na temat programowania webowego i innych ciekawych rzeczy!
       </h1>
       <div className="flex flex-wrap gap-4">
         <Button link="/about">
           O mnie <FiArrowUpRight size="1.4rem" />
         </Button>
       </div>
-      <p className="mt-40 text-center text-2xl">
-        Strona jest w trakcie budowy. Stay tuned 😁
-      </p>
-      {/* {featuredPosts.length >= 1 && (
+      {featuredPosts.length >= 1 && (
         <section className="mt-16">
           <h2 className="text-3xl">Wybrane posty</h2>
           <PostsList posts={featuredPosts} />
@@ -46,20 +42,24 @@ export const HomePage = ({
                 <Link
                   key={slug}
                   href={`/posts/${slug}`}
-                  className="md-gap-8 group flex h-14 items-center rounded-xl px-1 py-2 transition-all  hover:bg-[#97b6fd1c]"
+                  className="md-gap-8 group flex flex-col rounded-xl px-1 py-2 transition-all hover:bg-[#97b6fd1c] sm:flex-row  sm:items-center"
                 >
-                  <p className="m-0 whitespace-nowrap px-4 text-sm text-gray-500 dark:text-gray-300">
+                  <p className="m-0 hidden whitespace-nowrap px-4 text-sm text-gray-500 dark:text-gray-300 sm:block">
                     {date && format(parseISO(date), 'dd MMM ', { locale: pl })}
                   </p>
-                  <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white">
+                  <p className="m-0 whitespace-nowrap  text-sm text-gray-500 dark:text-gray-300 sm:hidden">
+                    {date &&
+                      format(parseISO(date), 'dd MMMM yyyy ', { locale: pl })}
+                  </p>
+                  <p className="m-0 text-lg font-semibold text-gray-900 group-hover:text-[#5686F5] dark:text-white sm:px-0">
                     {title}
                   </p>
                 </Link>
               );
             })}
           </div>
-        </section> */}
-      {/* )} */}
+        </section>
+      )}
     </Layout>
   );
 };

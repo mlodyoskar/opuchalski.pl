@@ -39,6 +39,7 @@ const Head = ({ customMeta }: { customMeta?: MetaProps }) => {
         sizes="16x16"
         href="/favicons/favicon-16x16.png"
       />
+
       <link rel="manifest" href="/favicons/site.webmanifest" />
       <meta property="og:type" content={meta.type} />
       <meta property="og:site_name" content="Oskar Puchalski • Blog" />
