@@ -1643,6 +1643,14 @@
     "@typescript-eslint/types" "5.40.0"
     eslint-visitor-keys "^3.3.0"
 
+"@typescript-eslint/visitor-keys@5.55.0":
+  version "5.55.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-5.55.0.tgz#01ad414fca8367706d76cdb94adf788dc5b664a2"
+  integrity sha512-q2dlHHwWgirKh1D3acnuApXG+VNXpEY5/AwRxDVuEQpxWaB0jCDe0jFMVMALJ3ebSfuOVE8/rMS+9ZOYGg1GWw==
+  dependencies:
+    "@typescript-eslint/types" "5.55.0"
+    eslint-visitor-keys "^3.3.0"
+
 acorn-jsx@^5.0.0, acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
@@ -4682,10 +4690,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier-plugin-tailwindcss@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.13.tgz#ca1071361dc7e2ed5d95a2ee36825ce45f814942"
-  integrity sha512-/EKQURUrxLu66CMUg4+1LwGdxnz8of7IDvrSLqEtDqhLH61SAlNNUSr90UTvZaemujgl3OH/VHg+fyGltrNixw==
+prettier-plugin-tailwindcss@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.2.6.tgz#d57e3d960f1a968bf16d2a5846e94f95d6b8add2"
+  integrity sha512-F+7XCl9RLF/LPrGdUMHWpsT6TM31JraonAUyE6eBmpqymFvDwyl0ETHsKFHP1NG+sEfv8bmKqnTxEbWQbHPlBA==
 
 prettier@^2.7.1:
   version "2.7.1"
