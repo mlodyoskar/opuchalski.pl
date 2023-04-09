@@ -1,12 +1,7 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { GetStaticPaths, InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import path from 'path';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrism from 'rehype-prism-plus';
@@ -14,81 +9,57 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import { Layout, WEBSITE_HOST_URL } from '../../components/Layout';
 import { MetaProps } from '../../types/layout';
-import { PostType } from '../../types/post';
-import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
+import { getPostFilePath, postFilePaths } from '../../utils/mdxUtils';
 import readingTime from 'reading-time';
-import React from 'react';
-import { Card } from '../../components/Card';
+import z from 'zod';
+import { BlogPostPage } from 'components/pages/PostPage';
 
-const components = {
-  Head,
-  Image,
-  Link,
-};
+const PostSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  releaseDate: z.string(),
+  image: z.string(),
+  featured: z.boolean(),
+});
 
-type PostPageProps = {
-  source: MDXRemoteSerializeResult;
-  frontMatter: PostType;
-  slug: string;
-  timeToRead: number;
-};
-
-const PostPage = ({ source, frontMatter, slug }: PostPageProps) => {
+const PostPage = ({
+  frontMatter,
+  slug,
+  source,
+  timeToRead,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const customMeta: MetaProps = {
     title: `${frontMatter.title} • opuchalski.pl`,
     description: frontMatter.description,
     image: `${WEBSITE_HOST_URL}/images/${slug}/opengraph.png`,
-    date: frontMatter.date,
+    date: frontMatter.releaseDate,
     type: 'article',
   };
 
   return (
     <Layout customMeta={customMeta}>
-      <article className="flex flex-col md:items-center">
-        <h1 className="mb-6 text-center text-4xl leading-tight text-gray-900 dark:text-white sm:text-5xl sm:leading-tight">
-          {frontMatter.title}
-        </h1>
-
-        {frontMatter.image && (
-          <Image
-            alt=""
-            className="rounded-xl"
-            width={700}
-            height={400}
-            src={frontMatter.image}
-          />
-        )}
-        <div className="prose prose-lg mb-4 max-w-[700px] dark:prose-dark">
-          <MDXRemote {...source} components={components} />
-        </div>
-        <footer className="w-full max-w-[700px]">
-          <Card>
-            <p className="m-0 text-xl">
-              Znalazłeś błąd lub literówkę? <br></br> Napisz do mnie, albo zrób
-              PR na{' '}
-              <a
-                href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
-                className="font-bold"
-              >
-                GitHubie!
-              </a>
-            </p>
-          </Card>
-        </footer>
-      </article>
+      <BlogPostPage
+        {...frontMatter}
+        mdxSource={source}
+        timeToRead={timeToRead}
+        slug={slug}
+      />
     </Layout>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postFilePath = path.join(POSTS_PATH, `${params?.slug}.mdx`);
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const postFilePath = getPostFilePath(params.slug);
   const source = fs.readFileSync(postFilePath);
-  const { content, data } = matter(source);
 
-  const timeToRead = readingTime(content).minutes;
+  const { content, data } = matter(source);
+  const { minutes } = readingTime(content);
 
   const mdxSource = await serialize(content, {
-    // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [
@@ -109,12 +80,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     scope: data,
   });
 
+  const frontMatterData = PostSchema.parse(data);
+
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: frontMatterData,
       slug: params?.slug,
-      timeToRead,
+      timeToRead: Math.round(minutes),
     },
   };
 };

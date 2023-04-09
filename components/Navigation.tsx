@@ -1,16 +1,20 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Navigation = () => {
   return (
     <nav>
-      <Link
-        href="/"
-        className="py-4 pr-6 text-xl text-gray-900 dark:text-white "
-      >
-        opuchalski.pl
+      <Link href="/" className=" text-gray-900 dark:text-white ">
+        <Image
+          alt={"Oskar's blog logo"}
+          src="/images/logo.svg"
+          width={48}
+          height={48}
+        />
+        {/* opuchalski.pl */}
       </Link>
     </nav>
   );
 };
 
-export default Navigation;
+export { Navigation };

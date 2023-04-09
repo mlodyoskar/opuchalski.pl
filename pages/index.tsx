@@ -1,5 +1,4 @@
 import { InferGetStaticPropsType } from 'next';
-import React from 'react';
 import { Button } from '../components/Button';
 import { Layout } from '../components/Layout';
 import { getAllPosts } from '../lib/api';
