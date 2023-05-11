@@ -4,14 +4,9 @@ import Image from 'next/image';
 const Navigation = () => {
   return (
     <nav>
-      <Link href="/" className=" text-gray-900 dark:text-white ">
-        <Image
-          alt={"Oskar's blog logo"}
-          src="/images/logo.svg"
-          width={48}
-          height={48}
-        />
-        {/* opuchalski.pl */}
+      <Link href="/">
+        <span className="sr-only">opuchalski.pl</span>
+        <Image alt="" src="/images/logo.svg" width={48} height={48} />
       </Link>
     </nav>
   );

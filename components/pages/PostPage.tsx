@@ -29,7 +29,7 @@ export const BlogPostPage = ({
       <h1 className="mb-2 text-center text-4xl leading-tight text-gray-900 dark:text-white sm:text-5xl sm:leading-tight">
         {title}
       </h1>
-      <p className="text-sm text-center text-gray-300 ">
+      <p className="text-sm text-center text-gray-700 dark:text-gray-300 ">
         {formattedDate} | {timeToRead} {minuteForm} czytania
       </p>
 
