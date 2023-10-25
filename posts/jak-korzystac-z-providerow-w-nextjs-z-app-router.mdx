@@ -1,0 +1,155 @@
+---
+title: 'Jak korzystać z Providerów w Next.js z App Router'
+description: Wraz z nowym podejściem w App Router zmienia się sposób w jaki używamy Providerów. Dowiedz się jak to zrobić.
+date: '2023-05-11'
+image: '/images/jak-korzystac-z-providerow-w-nextjs-z-app-router/thumbnail.png'
+featured: true
+---
+
+Najnowsza wersja Next.js, obecnie 13.4, wprowadziła stabilną i gotową do użycia wersję App Routera. Jednak najważniejszą zmianą jest wprowadzenie React Server Components, które oferują wiele przydatnych i interesujących funkcji, ale wymagają innego sposobu myślenia o budowaniu aplikacji.
+
+## Czym są Providery w React?
+
+Provider w React.js jest to komponent który ma za zadanie dostarczyć dane do komponentów podrzędnych. Realizuje się to z wykorzystaniem hooka `useContext`.
+
+Przykładowy Provider:
+
+```tsx
+const MyContext = createContext();
+
+// Komponent dostarczający dane
+const MyProvider = ({ children }) => {
+  const name = 'John Doe';
+
+  return <MyContext.Provider value={name}>{children}</MyContext.Provider>;
+};
+```
+
+Następnie możemy takiego komponentu użyć, a wszystkie komponenty będące dziećmi tego Providera będą miały dostęp do zmiennej `name` poprzez konekst.
+
+## Jak wykorzystać to w App Router?
+
+W _App Router_ wszystkie komponenty domyślnie są komponentami serwerowymi (_server components_), a w takowych nie możemy wykorzystywać żadnych hooków.
+
+Z pomocą przychodzi dyrektywa (mądre słowo 🙂) _“use client”_, której musimy użyć, aby oznaczyć że komponent ma zostać wyrenderowany na serwerze, a następnie po stronie klienta ma dojść do hydracji, czyli dodania interkatywności do naszej aplikacji. W naszym przypadku poprzez dodanie kontekstu.
+
+## Przykład z użyciem React Query
+
+_React Query_ jest biblioteką która pomaga nam w zarządzaniu asynchronicznym stanem. Aby móc jej użyć musimy, tak jak w przypadku wielu bibilotek, dostarczyć kontekst do dzieci komponentu za pomocą Providera.
+
+### Jak wygląda to w Pages Router
+
+Zobaczmy jednak najpierw dla porównania jak wygląda to w Pages Router.
+
+```tsx:pages/_app.tsx
+import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient();
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  );
+}
+
+export default MyApp;
+```
+
+Do naszego specjalnego pliku o nazwie `_app.tsx` umieszczamy nasz Provider i w zasadzie tyle, od tego momentu możemy w dowolnym komponencie podrzędnym dostać się do kontekstu.
+
+### Jak zrobić to w App Router
+
+Jak możemy wyczytać w dokumentacji, w nowym podejściu nie mamy już specjalnych plików `_document.js` oraz `_app.js`, a zamiast nich wykorzystujemy plik o nazwie `layout.js`. Każdy projekt musi mieć tzw. _Root Layout_ czyli layout który znajduje się obok pliku `page.tsx`.
+
+Domyślnie wygląda on tak:
+
+```tsx:app/layout.tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Moglibyśmy w takim razie wpaść na pomysł  że zrobimy to w ten sposób:
+
+```tsx:app/layout.tsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </QueryClientProvider>
+  );
+}
+```
+
+W konsoli szybko jednak pokaże nam się stos błędów dotyczących tego że bezpośrednio w komponencie serwerowym próbujemy użyć komponentu klienckiego.
+
+Możemy jednak to rozwiązać wyciągając _Provider_ do oddzielnego pliku, którego oznaczymy z pomocą “_use client_”.
+
+```tsx
+'use client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+export const TQueryClientProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      {props.children}
+    </QueryClientProvider>
+  );
+};
+```
+
+A następnie użyć go w `layout.tsx`
+
+```tsx:app/layout.tsx
+import { TQueryClientProvider } from './queryClientProvider';
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <TQueryClientProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </TQueryClientProvider>
+  );
+}
+```
+
+W ten sposób możemy dodać każdy Provider, zarówno stworzony przez nas, aby dostarczyć dane z kontekstu jak i z dowolnej biblioteki która od nas tego wymaga.
+
+## Podsumowanie
+
+Osobiście jestem mega zajarany możliwościami App Routera i myślę że to kwestia czasu, zanim te wszystkie nowości zaczną być adoptowane w projektach komercyjnych.
+
+Mam nadzieję, że ten wpis był dla Ciebie pomocny! Do usłyszenia w następnym! 👋
