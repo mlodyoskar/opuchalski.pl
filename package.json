@@ -9,7 +9,6 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "lint": "next lint",
     "knip": "knip"
   },
   "husky": {
@@ -20,46 +19,29 @@
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "pnpm lint",
       "pnpm format"
     ]
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "date-fns": "^2.29.2",
-    "gray-matter": "^4.0.3",
     "next": "^16.0.4",
-    "next-mdx-remote": "^5.0.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "reading-time": "^1.5.0"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@axe-core/react": "^4.6.0",
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.55.0",
     "autoprefixer": "^10.4.9",
-    "eslint": "^9.39.1",
-    "eslint-config-next": "^16.0.4",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
     "knip": "^5.70.1",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.21",
     "prettier": "^2.7.1",
-    "rehype-autolink-headings": "7.1.0",
-    "rehype-code-titles": "1.2.1",
-    "rehype-prism-plus": "^2.0.1",
-    "rehype-slug": "6.0.0",
-    "remark-gfm": "^4.0.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^5.9.3",
-    "velite": "^0.3.0"
+    "velite": "^0.3.0",
+    "webpack": "^5.97.1"
   }
 }

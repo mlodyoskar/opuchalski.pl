@@ -1,5 +1,5 @@
 {
-  "entry": ["pages/**/*.{ts,tsx}"],
+  "entry": ["app/**/*.{ts,tsx}", "velite.config.ts"],
   "project": ["**/*.{ts,tsx,js,json}"],
   "ignore": ["**/*.d.ts"],
   "ignoreExportsUsedInFile": true
