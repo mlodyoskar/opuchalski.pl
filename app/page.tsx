@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import pl from 'date-fns/locale/pl';
-import { getAllPosts } from '../lib/api';
-import { PostType } from '../types/post';
+import { Post, posts } from '@/velite';
 
-const PostItem = ({ post }: { post: PostType }) => {
-  const { title, date, slug } = post;
+const PostItem = (props: Post) => {
+  const { title, date, slug } = props;
+
   return (
     <Link
       href={`/posts/${slug}`}
@@ -24,7 +24,9 @@ const PostItem = ({ post }: { post: PostType }) => {
 };
 
 export default async function HomePage() {
-  const posts = getAllPosts();
+  const sortedPosts = posts.sort((a, b) =>
+    new Date(a.date) > new Date(b.date) ? -1 : 1
+  );
 
   return (
     <div className="flex min-h-[60vh] animate-fade-in-up flex-col justify-center py-12">
@@ -60,8 +62,8 @@ export default async function HomePage() {
       <section className="mt-24">
         <h2 className="mb-10 text-3xl font-bold text-white">Wybrane posty</h2>
         <div className="grid gap-8">
-          {posts.map((post) => (
-            <PostItem key={post.slug} post={post} />
+          {sortedPosts.map((post) => (
+            <PostItem key={post.slug} {...post} />
           ))}
         </div>
       </section>

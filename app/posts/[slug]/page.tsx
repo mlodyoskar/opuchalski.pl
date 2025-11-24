@@ -1,20 +1,11 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { posts } from '@/velite';
 import { notFound } from 'next/navigation';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeCodeTitles from 'rehype-code-titles';
-import rehypePrism from 'rehype-prism-plus';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
-import readingTime from 'reading-time';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { POSTS_PATH, postFilePaths } from '../../../utils/mdxUtils';
-import { Card } from '../../../components/Card';
 import { WEBSITE_HOST_URL } from '../../../lib/constants';
+import { Card } from '../../../components/Card';
+import { MDXContent } from '../../../components/mdx-content';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -26,18 +17,8 @@ const components = {
 };
 
 async function getPost(slug: string) {
-  const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
-  if (!fs.existsSync(postFilePath)) {
-    return null;
-  }
-  const source = fs.readFileSync(postFilePath, 'utf8');
-  const { content, data } = matter(source);
-
-  return {
-    content,
-    frontMatter: data,
-    timeToRead: readingTime(content).minutes,
-  };
+  const post = posts.find((p) => p.slug === slug);
+  return post || null;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -46,13 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) {
     return {};
   }
-  const { frontMatter } = post;
+
   return {
-    title: `${frontMatter.title} • opuchalski.pl`,
-    description: frontMatter.description,
+    title: `${post.title} • opuchalski.pl`,
+    description: post.description,
     openGraph: {
-      title: `${frontMatter.title} • opuchalski.pl`,
-      description: frontMatter.description,
+      title: `${post.title} • opuchalski.pl`,
+      description: post.description,
       url: `${WEBSITE_HOST_URL}/posts/${slug}`,
       type: 'article',
       images: [
@@ -60,17 +41,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: `${WEBSITE_HOST_URL}/images/${slug}/opengraph.png`,
         },
       ],
-      publishedTime: frontMatter.date,
+      publishedTime: post.date,
     },
   };
 }
 
 export async function generateStaticParams() {
-  const paths = postFilePaths
-    .map((path) => path.replace(/\.mdx?$/, ''))
-    .map((slug) => ({ slug }));
-
-  return paths;
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export default async function PostPage({ params }: Props) {
@@ -81,46 +60,23 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  const { content, frontMatter } = post;
-
   return (
     <article className="flex flex-col md:items-center">
       <h1 className="mb-6 text-center text-4xl leading-tight text-white sm:text-5xl sm:leading-tight">
-        {frontMatter.title}
+        {post.title}
       </h1>
 
-      {frontMatter.image && (
+      {post.image && (
         <Image
           alt=""
           className="rounded-xl"
           width={700}
           height={400}
-          src={frontMatter.image}
+          src={post.image}
         />
       )}
       <div className="prose prose-lg prose-dark mb-4 max-w-[700px]">
-        <MDXRemote
-          source={content}
-          components={components as any}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                rehypeSlug,
-                rehypeCodeTitles,
-                rehypePrism,
-                [
-                  rehypeAutolinkHeadings,
-                  {
-                    properties: {
-                      className: ['anchor'],
-                    },
-                  },
-                ],
-              ],
-            },
-          }}
-        />
+        <MDXContent code={post.content} components={components as any} />
       </div>
       <footer className="w-full max-w-[700px]">
         <Card>
