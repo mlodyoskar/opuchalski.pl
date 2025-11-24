@@ -1,12 +1,14 @@
+'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 const Navigation = () => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const isActive = (path: string) => {
-    return router.pathname === path
+    return pathname === path
       ? 'underline decoration-wavy decoration-blue-500 decoration-2 underline-offset-8'
       : '';
   };
@@ -26,7 +28,7 @@ const Navigation = () => {
       <div>
         <Link
           href="/portfolio"
-          aria-current={router.pathname === '/portfolio' ? 'page' : undefined}
+          aria-current={pathname === '/portfolio' ? 'page' : undefined}
           className={`py-4 px-6 text-lg text-gray-300 transition-colors hover:text-white ${isActive(
             '/portfolio'
           )}`}
@@ -35,7 +37,7 @@ const Navigation = () => {
         </Link>
         <Link
           href="/about"
-          aria-current={router.pathname === '/about' ? 'page' : undefined}
+          aria-current={pathname === '/about' ? 'page' : undefined}
           className={`py-4 px-6 text-lg text-gray-300 transition-colors hover:text-white ${isActive(
             '/about'
           )}`}

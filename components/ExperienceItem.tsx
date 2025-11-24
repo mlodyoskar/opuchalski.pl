@@ -46,9 +46,8 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                 <Image
                   src={logo}
                   alt={`${company} logo`}
-                  layout="fill"
-                  objectFit="contain"
-                  className="p-1"
+                  fill
+                  className="p-1 object-contain"
                 />
               </div>
             )}
