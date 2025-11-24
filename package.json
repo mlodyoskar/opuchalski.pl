@@ -9,7 +9,8 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "knip": "knip"
   },
   "husky": {
     "hooks": {
@@ -27,19 +28,15 @@
     "@tailwindcss/typography": "^0.5.9",
     "date-fns": "^2.29.2",
     "gray-matter": "^4.0.3",
-    "mdx-prism": "^0.3.4",
     "next": "^13.0.2",
     "next-mdx-remote": "^4.1.0",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.6.0",
-    "@svgr/webpack": "^6.5.1",
-    "@testing-library/react": "^13.4.0",
     "@types/node": "^18.7.17",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.6",
@@ -48,16 +45,13 @@
     "autoprefixer": "^10.4.9",
     "eslint": "^8.46.0",
     "eslint-config-next": "^13.0.0",
-    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
-    "identity-obj-proxy": "^3.0.0",
+    "knip": "^5.70.1",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.21",
     "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.2.6",
-    "rehype": "^12.0.1",
     "rehype-autolink-headings": "6.1.1",
     "rehype-code-titles": "1.1.0",
     "rehype-prism-plus": "^1.5.0",
