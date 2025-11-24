@@ -23,7 +23,7 @@ export const Document = () => {
           }}
         />
       </Head>
-      <body className="bg-bg-light text-gray-900 dark:bg-bg-dark dark:text-white">
+      <body className="bg-bg-dark text-white">
         <Main />
         <NextScript />
       </body>

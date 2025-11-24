@@ -2,7 +2,6 @@ import React from 'react';
 import { MetaProps } from '../types/layout';
 import Head from './Head';
 import Navigation from './Navigation';
-import ThemeSwitch from './ThemeSwitch';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -15,11 +14,10 @@ export const Layout = ({ children, customMeta }: LayoutProps) => {
   return (
     <>
       <Head customMeta={customMeta} />
-      <header className="sticky top-0 z-10 border-b border-gray-200 backdrop-blur-lg backdrop-filter dark:border-gray-800">
+      <header className="sticky top-0 z-10 border-b border-gray-800 backdrop-blur-lg backdrop-filter">
         <div className="mx-auto max-w-5xl px-8 ">
           <div className="flex items-center justify-between py-4">
             <Navigation />
-            <ThemeSwitch />
           </div>
         </div>
       </header>

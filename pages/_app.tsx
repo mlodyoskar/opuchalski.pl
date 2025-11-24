@@ -1,4 +1,3 @@
-import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import { useEffect } from 'react';
@@ -30,13 +29,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return () => false;
   }, []);
 
-  return (
-    <>
-      <ThemeProvider attribute="class" enableSystem={true} defaultTheme="dark">
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
-  );
+  return <Component {...pageProps} />;
 };
 
 export default MyApp;

@@ -1,21 +1,33 @@
 const { spacing } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        "bg-dark": "#16181D",
-        "bg-light": "#F9FAFB",
-        "primary": {
-          100: "#dee7ff",
-          700: "#0035b0",
-          800: "#1D2433",
-        }
+        'bg-dark': '#16181D',
+        'bg-light': '#F9FAFB',
+        primary: {
+          100: '#dee7ff',
+          700: '#0035b0',
+          800: '#1D2433',
+        },
       },
       boxShadow: {
-        btn: "0 2px 40px -4px",
+        btn: '0 2px 40px -4px',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -31,7 +43,6 @@ module.exports = {
             'h2,h3,h4': {
               'scroll-margin-top': spacing[32],
               color: theme('colors.blue.500'),
-
             },
             code: { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
