@@ -1,48 +1,66 @@
-import Image from 'next/image';
+import React from 'react';
 import { Layout } from '../components/Layout';
-import { SocialLinks } from '../components/SocialLinks';
+import ExperienceItem from '../components/ExperienceItem';
 
-const AboutPage = () => {
+type Experience = {
+  company: string;
+  position: string;
+  date: string;
+  logo?: string;
+  description: string[];
+};
+
+const About = () => {
+  // TODO: Add experiences
+  const experiences: Experience[] = [];
+
   return (
     <Layout
       customMeta={{
-        title: 'Oskar Puchalski • O mnie',
-        description:
-          'O mnie - czyli dowiedz się trochę więcej czym się zajmuje',
+        title: 'About - Oskar Puchalski',
+        description: 'Learn more about my background and experience.',
       }}
     >
-      <section className="flex flex-col justify-between gap-4 md:flex-row">
-        <div className=" text-lg  md:w-1/2">
-          <h1 className="text-3xl">O mnie</h1>
-          <p>Siemka, dobrze Cię tu widzieć! 👋</p>
-          <p>
-            Mam na imię Oskar i staram się tworzyć oprogramowanie które pomaga
-            innym.
+      <div className="animate-fade-in-up">
+        {/* Hero Section */}
+        <div className="mx-auto max-w-4xl py-20 px-4 text-center md:py-32">
+          <h1 className="mb-8 text-5xl font-bold tracking-tight text-white md:text-7xl">
+            Done is better than perfect
+          </h1>
+          <p className="text-xl leading-relaxed text-gray-300">
+            I&apos;m a software engineer based in Poland. I have a passion for
+            building web applications and solving complex problems. I&apos;m
+            always looking for new challenges and opportunities to learn and
+            grow.
           </p>
-          <p>
-            Lubię przekazywać zdobytą wiedzę i to właśnie z tego powodu powstał
-            ten blog!
-          </p>
-          <p>
-            Poza kodowaniem wspinam się po ścianach i biegam po centrum Poznania
-            🧗🏃
-          </p>
+        </div>
 
-          <p>Wpadnij na moje sociale 👇</p>
-          <SocialLinks />
-        </div>
-        <div className="">
-          <Image
-            alt="Oskar climbing a wall"
-            width={420}
-            height={200}
-            src="/images/about.jpeg"
-            className="rounded-md"
-          />
-        </div>
-      </section>
+        <p className="text-xl leading-relaxed text-lg text-center">
+          Something is cooking here, stay tuned!
+        </p>
+
+        {/* <div className="border-t border-gray-800 py-20">
+          <div className="mx-auto max-w-5xl px-4">
+            <h2 className="mb-16 text-center text-3xl font-bold text-white md:text-4xl">
+              Experience
+            </h2>
+
+            <div className="relative">
+              <ol className="m-0 list-none p-0">
+                {experiences.map((exp, index) => (
+                  <ExperienceItem
+                    key={index}
+                    {...exp}
+                    isLast={index === experiences.length - 1}
+                  />
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div> */}
+      </div>
     </Layout>
   );
 };
 
-export default AboutPage;
+export default About;
