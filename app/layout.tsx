@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 import Navigation from '../components/Navigation';
 
+const gaTrackingId = process.env.GA_TRACKING_ID;
+
 export const metadata: Metadata = {
   title: 'Oskar Puchalski',
   description:
@@ -17,24 +19,28 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <head>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.GA_TRACKING_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+        {gaTrackingId && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaTrackingId}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="bg-bg-dark text-white">
         <header className="sticky top-0 z-10 border-b border-gray-800 backdrop-blur-lg backdrop-filter">

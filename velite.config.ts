@@ -11,6 +11,7 @@ export default defineConfig({
           description: s.string().max(200),
           slug: s.path(),
           date: s.isodate(),
+          draft: s.boolean().default(false),
           image: s.string().optional(),
           content: s.mdx(),
         })

@@ -24,9 +24,9 @@ const PostItem = (props: Post) => {
 };
 
 export default async function HomePage() {
-  const sortedPosts = posts.sort((a, b) =>
-    new Date(a.date) > new Date(b.date) ? -1 : 1
-  );
+  const sortedPosts = posts
+    .filter((post) => !post.draft)
+    .toSorted((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return (
     <div className="flex min-h-[60vh] animate-fade-in-up flex-col justify-center py-12">

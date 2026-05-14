@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { posts } from '@/velite';
+import { Post, posts } from '@/velite';
 import { notFound } from 'next/navigation';
 import { WEBSITE_HOST_URL } from '../../../lib/constants';
 import { Card } from '../../../components/Card';
@@ -16,8 +16,21 @@ const components = {
   Link,
 };
 
+const publishedPosts = posts.filter((post) => !post.draft);
+const defaultOpenGraphImage = `${WEBSITE_HOST_URL}/images/preview.png`;
+
+function getPostOpenGraphImage(post: Post) {
+  if (!post.image) {
+    return defaultOpenGraphImage;
+  }
+
+  return post.image.startsWith('http')
+    ? post.image
+    : `${WEBSITE_HOST_URL}${post.image}`;
+}
+
 async function getPost(slug: string) {
-  const post = posts.find((p) => p.slug === slug);
+  const post = publishedPosts.find((p) => p.slug === slug);
   return post || null;
 }
 
@@ -38,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       images: [
         {
-          url: `${WEBSITE_HOST_URL}/images/${slug}/opengraph.png`,
+          url: getPostOpenGraphImage(post),
         },
       ],
       publishedTime: post.date,
@@ -47,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return posts.map((post) => ({
+  return publishedPosts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -76,7 +89,7 @@ export default async function PostPage({ params }: Props) {
         />
       )}
       <div className="prose prose-lg prose-dark mb-4 max-w-[700px]">
-        <MDXContent code={post.content} components={components as any} />
+        <MDXContent code={post.content} components={components} />
       </div>
       <footer className="w-full max-w-[700px]">
         <Card>
@@ -84,7 +97,7 @@ export default async function PostPage({ params }: Props) {
             Znalazłeś błąd lub literówkę? <br></br> Napisz do mnie, albo zrób PR
             na{' '}
             <a
-              href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/posts/${slug}.mdx`}
+              href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/content/posts/${slug}.mdx`}
               className="font-bold"
             >
               GitHubie!

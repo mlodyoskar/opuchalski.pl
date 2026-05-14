@@ -1,23 +1,11 @@
 import { Metadata } from 'next';
-import ExperienceItem from '../../components/ExperienceItem';
 
 export const metadata: Metadata = {
   title: 'About - Oskar Puchalski',
   description: 'Learn more about my background and experience.',
 };
 
-type Experience = {
-  company: string;
-  position: string;
-  date: string;
-  logo?: string;
-  description: string[];
-};
-
 export default function AboutPage() {
-  // TODO: Add experiences
-  const experiences: Experience[] = [];
-
   return (
     <div className="animate-fade-in-up">
       {/* Hero Section */}
