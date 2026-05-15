@@ -29,7 +29,7 @@ export default async function HomePage() {
     .toSorted((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return (
-    <div className="flex min-h-[60vh] animate-fade-in-up flex-col justify-center py-12">
+    <div className="flex min-h-[60vh] flex-col justify-center py-12">
       <h1 className="mb-8 text-6xl font-bold leading-tight tracking-tighter text-white md:text-8xl">
         Cześć, <br />
         tu Oskar 👋

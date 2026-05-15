@@ -20,7 +20,6 @@ class VeliteWebpackPlugin {
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  // Empty turbopack config to silence warnings
   turbopack: {},
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin({}));

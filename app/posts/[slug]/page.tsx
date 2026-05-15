@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Post, posts } from '@/velite';
 import { notFound } from 'next/navigation';
 import { WEBSITE_HOST_URL } from '../../../lib/constants';
-import { Card } from '../../../components/Card';
 import { MDXContent } from '../../../components/mdx-content';
 
 type Props = {
@@ -91,20 +90,6 @@ export default async function PostPage({ params }: Props) {
       <div className="prose prose-lg prose-dark mb-4 max-w-[700px]">
         <MDXContent code={post.content} components={components} />
       </div>
-      <footer className="w-full max-w-[700px]">
-        <Card>
-          <p className="m-0 text-xl">
-            Znalazłeś błąd lub literówkę? <br></br> Napisz do mnie, albo zrób PR
-            na{' '}
-            <a
-              href={`https://github.com/mlodyoskar/opuchalski.pl/blob/main/content/posts/${slug}.mdx`}
-              className="font-bold"
-            >
-              GitHubie!
-            </a>
-          </p>
-        </Card>
-      </footer>
     </article>
   );
 }

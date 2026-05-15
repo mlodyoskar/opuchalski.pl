@@ -1,0 +1,64 @@
+---
+title: 'Building CTC Atlas: an open-access cancer research platform'
+description: A case study on building a fast, low-cost research platform for browsing and filtering circulating tumor cell data.
+date: '2026-05-14'
+draft: false
+---
+
+I built CTC Atlas, an open-access cancer research platform for exploring circulating tumor cell data. The goal was to make a complex scientific dataset searchable, fast, and inexpensive to operate after the grant-funded build ended.
+
+I owned the technical architecture, frontend implementation, CMS integration, deployment, analytics, and client communication. UI design was provided externally.
+
+The atlas contains 200+ analyzed cells, a large record of individual markers, and an interface where users can conveniently browse this data.
+
+![CTC Atlas homepage hero showing the public research platform interface](/images/building-ctc-atlas/homepage-hero.png)
+
+## Problem
+
+The main challenge was turning complex scientific material into a public product that was fast, maintainable and affordable.
+
+The atlas itself was the hardest part: users needed to browse real cell images, filter records by biological and clinical properties, and inspect individual cells without working directly with the underlying dataset.
+
+The product also had to work within practical university grant constraints. It needed to be inexpensive to host and simple enough to keep online after the initial development budget was spent.
+
+## Technical approach
+
+I chose Astro because most of the product could be pre-rendered and served cheaply through Cloudflare, while the atlas route could stay dynamic for filtering. This kept hosting costs low without forcing the entire app into a server-heavy architecture.
+
+For content management, I chose self-hosted Strapi over a hosted CMS because the project needed predictable long-term costs. The trade-off was more deployment complexity, especially around Dockerizing Strapi inside a pnpm monorepo.
+
+Therefore I decided to go with a classic VPS approach. We rented it for 3 years in advance, and it runs Strapi CMS and the database.
+
+It made CI/CD more complicated, but I believe it was still the correct trade-off.
+
+Today I would consider other options like Payload CMS, which at that time was still in its early stages.
+
+## CMS and content model
+
+Strapi allowed seamless collaboration with editors. Webhooks on edit allowed for easy redeployment of the SSG site whenever an editor changed something in the CMS. At the beginning I was a bit jealous of Next.js ISR and how you can simply refresh the data without rebuilding the whole project, but the builds were actually pretty fast.
+
+The plugin ecosystem also wasn’t the greatest, and usually adding one required some additional work.
+
+However, there were some issues that I had with Strapi along the way. It lacks, in my opinion, a basic field type: multiselect. I didn’t want to create a separate collection that I would have to point to, so I chose to use the Strapi CMS multiselect field plugin, but it didn’t come without trade-offs. This plugin kept the values simply as a JSON column in the database, which wasn’t great, but the bigger problem was that it broke the OpenAPI spec and I had to parse that manually.
+
+Another issue was deployment. I wanted to have a simple pipeline where, after pushing to `master`, GitHub builds a Docker image and pushes it to the registry, then the VPS pulls that image and runs it. However, packaging Strapi CMS into a custom Docker image wasn’t easy. Maybe that was because of the monorepo structure and use of pnpm (I see you, symlinks), but I believe it could be simplified.
+
+## Atlas interface
+
+The hard part initially was integrating the filtering logic with Strapi CMS. The interface allows filtering by 15 parameters. Some of them are simple string types, some are booleans, and some target the previously mentioned multiselect fields, which are filtered in a different way.
+
+We didn’t simply want to display a dataset to users. We wanted to give them the ability to narrow down the cells by as many filters as they wish. It allows users to view the “merged” images and go from a broad gallery view to individual cell-level details.
+
+What I’m also proud of is how snappy and quick the filtering feels. There is no waiting a couple of seconds before it reloads; it is instant.
+
+## Outcome and Reflection
+
+All that effort resulted in a strong cell catalog experience that helps both the public and medical researchers. The atlas has been publicly used by researchers and visitors, with **1,867 pageviews** over the last 6 months and a monthly peak of 472 pageviews in February 2026.
+
+The project was also mentioned by Polish medical and university publications:
+
+- [Rynek Zdrowia](https://www.rynekzdrowia.pl/Badania-i-rozwoj/Zespol-z-GUMed-tworzy-unikalna-platforme-internetowa-Pomoze-badac-mechanizm-rozsiewu-nowotworow,271769,11.html)
+- [Międzyuczelniany Wydział Biotechnologii UG i GUMed](https://biotech.ug.edu.pl/news/112946/ctc-atlas-nowe-narzedzie-w-badaniach-nad-krazacymi-komorkami-nowotworowymi)
+- [Medonet](https://www.medonet.pl/narodowy-test-zdrowia-polakow/nowotwory,rewolucyjne-narzedzie-w-badaniach-nad-rakiem--polscy-naukowcy-dokonuja-przelomu,artykul,20878101.html)
+
+If I were to create it again from scratch today, I would probably use a different technology stack, mainly to simplify deployment.

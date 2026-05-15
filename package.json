@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "velite dev & next dev --turbo",
     "build": "velite build --clean && next build",
     "start": "next start",
     "lint": "eslint .",
