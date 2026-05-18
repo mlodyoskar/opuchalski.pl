@@ -1,19 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 const Navigation = () => (
-  <nav className="flex w-full items-center justify-between">
-    <Link href="/">
-      <Image
-        src="/logo.png"
-        alt="opuchalski.pl - Strona główna"
-        width={56}
-        height={56}
-        priority
-        className="h-14 w-14"
-      />
+  <nav className="flex w-full items-center justify-between" aria-label="Primary">
+    <Link
+      href="/"
+      className="font-mono text-[0.8rem] font-semibold uppercase tracking-[0.34em] text-zinc-100 transition-colors hover:text-accent-light"
+    >
+      Oskar Puchalski
     </Link>
   </nav>
 );

@@ -3,6 +3,52 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --site-bg: #080807;
+    --site-panel: #121210;
+    --site-line: rgba(255, 255, 255, 0.08);
+    --site-muted: #a1a1aa;
+    --site-accent: #f07125;
+  }
+
+  body {
+    background-color: var(--site-bg);
+    position: relative;
+  }
+
+  body::before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: min(920px, 115vh);
+    z-index: 0;
+    background-image: linear-gradient(rgba(8, 8, 7, 0.1), rgba(8, 8, 7, 1)),
+      url('/images/site-background.webp');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: max(100vw, 1440px) auto;
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 42%,
+      rgba(0, 0, 0, 0.72) 64%,
+      rgba(0, 0, 0, 0.28) 84%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 42%,
+      rgba(0, 0, 0, 0.72) 64%,
+      rgba(0, 0, 0, 0.28) 84%,
+      transparent 100%
+    );
+    transform: scaleX(-1);
+  }
+
   h1 {
     @apply mb-6 text-3xl font-semibold;
   }
@@ -13,15 +59,229 @@
     @apply mb-4;
   }
   a {
-    @apply text-blue-400 hover:text-blue-300;
+    @apply text-accent hover:text-accent-light;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--site-accent);
+    outline-offset: 4px;
+  }
+}
+
+@media (min-width: 1536px) {
+  body::before {
+    height: min(980px, 120vh);
+    background-position: calc(50% + 18rem) top;
+    background-size: min(150vw, 2600px) auto;
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 46%,
+      rgba(0, 0, 0, 0.74) 66%,
+      rgba(0, 0, 0, 0.3) 86%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 46%,
+      rgba(0, 0, 0, 0.74) 66%,
+      rgba(0, 0, 0, 0.3) 86%,
+      transparent 100%
+    );
   }
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 10;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  transform: translateY(-150%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #11110f;
+  color: #f4f4f5;
+  padding: 0.75rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* Post styles */
+
+.post-prose {
+  --tw-prose-body: #a1a1aa;
+  --tw-prose-headings: #f4f4f5;
+  --tw-prose-lead: #d4d4d8;
+  --tw-prose-links: #f07125;
+  --tw-prose-bold: #e4e4e7;
+  --tw-prose-counters: #71717a;
+  --tw-prose-bullets: #f07125;
+  --tw-prose-hr: rgba(255, 255, 255, 0.08);
+  --tw-prose-quotes: #d4d4d8;
+  --tw-prose-quote-borders: #f07125;
+  --tw-prose-captions: #71717a;
+  --tw-prose-code: #e4e4e7;
+  --tw-prose-pre-code: #e4e4e7;
+  --tw-prose-pre-bg: #11110f;
+  --tw-prose-th-borders: rgba(255, 255, 255, 0.12);
+  --tw-prose-td-borders: rgba(255, 255, 255, 0.08);
+  color: #a1a1aa;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.post-prose p,
+.post-prose li,
+.post-prose td {
+  color: #a1a1aa;
+}
+
+.post-prose h2,
+.post-prose h3,
+.post-prose h4 {
+  color: #f4f4f5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.post-prose h2 {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.65rem;
+  line-height: 1.45;
+}
+
+.post-prose h3 {
+  margin-top: 2.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.post-prose a {
+  color: #f28540;
+  text-decoration-color: rgba(240, 113, 37, 0.45);
+  text-underline-offset: 0.22em;
+}
+
+.post-prose a:hover {
+  color: #f28540;
+  text-decoration-color: #f28540;
+}
+
+.post-prose blockquote {
+  border-left-width: 1px;
+  font-style: normal;
+}
+
+.post-prose ul {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.post-prose li::marker {
+  color: #f07125;
+}
+
+.post-tldr {
+  margin: 2.25rem 0 2.75rem;
+  border: 1px solid rgba(240, 113, 37, 0.38);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(240, 113, 37, 0.18),
+      rgba(240, 113, 37, 0.055) 46%,
+      rgba(17, 17, 15, 0.72)
+    ),
+    #11110f;
+  padding: 1.25rem;
+}
+
+.post-tldr__eyebrow {
+  margin: 0 0 0.9rem;
+  color: #f28540 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.post-tldr h2 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  color: #fafafa;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.post-tldr ul {
+  margin: 1.15rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.post-tldr li {
+  margin: 0.55rem 0;
+  color: #d4d4d8;
+}
+
+.post-prose img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #11110f;
+  border-radius: 4px;
+}
+
+.post-prose :not(pre) > code {
+  border: 0;
+  border-radius: 0;
+  background: rgba(240, 113, 37, 0.12);
+  color: #f28540;
+  font-size: 0.92em;
+}
+
+.post-prose :not(pre) > code::before,
+.post-prose :not(pre) > code::after {
+  content: none;
+}
 
 .prose .anchor {
   @apply absolute invisible no-underline;
@@ -51,11 +311,13 @@ html {
 }
 
 .prose pre {
-  @apply border border-gray-700 bg-gray-900;
+  @apply border border-white/[0.1] bg-[#11110f];
+  border-radius: 0;
 }
 
 .prose code {
-  @apply text-gray-200 px-1 py-0.5 border border-gray-800 rounded-lg bg-gray-900;
+  @apply text-gray-200 px-1 py-0.5 border border-white/[0.1] bg-[#11110f];
+  border-radius: 0;
 }
 
 .prose pre code {
@@ -66,7 +328,6 @@ html {
 .prose img {
   /* Don't apply styles to next/image */
   @apply m-0;
-  @apply rounded-xl;
 }
 
 .prose > :first-child {

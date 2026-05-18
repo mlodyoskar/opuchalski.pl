@@ -17,6 +17,11 @@ module.exports = {
           700: '#0035b0',
           800: '#1D2433',
         },
+        accent: {
+          DEFAULT: '#f07125',
+          light: '#f28540',
+          dark: '#d45d10',
+        },
       },
       boxShadow: {
         btn: '0 2px 40px -4px',

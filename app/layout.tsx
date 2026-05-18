@@ -8,7 +8,7 @@ const gaTrackingId = process.env.GA_TRACKING_ID;
 export const metadata: Metadata = {
   title: 'Oskar Puchalski',
   description:
-    'Witaj na moim blogu. Tworzę cyfrowe doświadczenia, piszę o programowaniu webowym i dzielę się wiedzą na temat nowoczesnych technologii.',
+    'Frontend and product engineer based in Warsaw. I build fast web products and write about the craft behind them.',
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         {gaTrackingId && (
           <>
@@ -42,20 +42,20 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className="bg-bg-dark text-white">
-        <header className="sticky top-0 z-10 border-b border-gray-800 backdrop-blur-lg backdrop-filter">
-          <div className="mx-auto max-w-5xl px-8 ">
-            <div className="flex items-center justify-between py-4">
+      <body className="min-h-screen bg-[#0d0d0c] text-zinc-100 antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <header className="sticky top-0 z-20 bg-transparent">
+          <div className="mx-auto max-w-6xl px-6 md:px-8 2xl:max-w-[92rem] 2xl:px-12">
+            <div className="flex min-h-20 items-center justify-between">
               <Navigation />
             </div>
           </div>
         </header>
-        <main>
-          <div className="mx-auto max-w-5xl px-8 py-4">{children}</div>
+        <main id="main-content" tabIndex={-1}>
+          {children}
         </main>
-        <footer className="py-8">
-          <div className="mx-auto max-w-5xl px-8"></div>
-        </footer>
       </body>
     </html>
   );
