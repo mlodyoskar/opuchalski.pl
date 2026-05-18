@@ -1,27 +1,37 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { format, parseISO } from 'date-fns';
-import pl from 'date-fns/locale/pl';
-import { Post, posts } from '@/velite';
+import { posts } from '@/velite';
 
-const PostItem = (props: Post) => {
-  const { title, date, slug } = props;
+const contactItems = [
+  { label: 'Based in Warsaw, Poland' },
+  { label: 'Available for freelance' },
+  { label: 'hello@opuchalski.pl', href: 'mailto:hello@opuchalski.pl' },
+  { label: '@mlodyoskar', href: 'https://github.com/mlodyoskar' },
+];
 
+const sectionDivider =
+  'relative after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:-translate-x-1/2 after:bg-white/[0.08]';
+
+function SectionLabel({ children }: { children: ReactNode }) {
   return (
-    <Link
-      href={`/posts/${slug}`}
-      className="group -mx-6 block rounded-2xl p-6 transition-all duration-300 hover:bg-gray-800/50"
-    >
-      <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
-        <h3 className="text-xl font-semibold text-white transition-colors group-hover:text-blue-400">
-          {title}
-        </h3>
-        <time className="shrink-0 font-mono text-sm text-gray-400">
-          {date && format(parseISO(date), 'dd MMMM yyyy', { locale: pl })}
-        </time>
-      </div>
-    </Link>
+    <h2 className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-zinc-200">
+      {children}
+    </h2>
   );
-};
+}
+
+function AboutVisual() {
+  return (
+    <div className="relative aspect-square w-full overflow-hidden border border-white/[0.1] bg-[#11110f]">
+      <img
+        src="/images/about-avatar.webp"
+        alt="Abstract orange portrait silhouette representing Oskar Puchalski"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  );
+}
 
 export default async function HomePage() {
   const sortedPosts = posts
@@ -29,44 +39,112 @@ export default async function HomePage() {
     .toSorted((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 
   return (
-    <div className="flex min-h-[60vh] flex-col justify-center py-12">
-      <h1 className="mb-8 text-6xl font-bold leading-tight tracking-tighter text-white md:text-8xl">
-        Cześć, <br />
-        tu Oskar 👋
-      </h1>
-      <p className="max-w-2xl text-xl leading-relaxed text-gray-400 md:text-2xl">
-        Witaj na moim blogu. Tworzę cyfrowe doświadczenia, piszę o programowaniu
-        webowym i dzielę się wiedzą na temat nowoczesnych technologii.
-      </p>
+    <div className="mx-auto max-w-6xl px-6 md:px-8 2xl:max-w-[92rem] 2xl:px-12">
+      <section className={`${sectionDivider} py-16 md:py-20 2xl:py-24`}>
+        <div className="2xl:ml-[6vw]">
+          <div className="mb-8 flex items-center gap-5 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-zinc-300">
+            <span>Frontend / Product Engineer</span>
+            <span className="h-px w-10 bg-accent" aria-hidden="true" />
+          </div>
 
-      <Link
-        href="/about"
-        className="inline-flex w-fit md:mt-10 mt-4 items-center rounded-full bg-white px-6 py-3 text-lg font-medium text-gray-900"
+          <h1 className="mb-0 max-w-2xl font-mono text-3xl font-normal leading-[1.4] tracking-normal text-zinc-50 sm:text-4xl md:text-5xl 2xl:max-w-3xl">
+            I build products and write about building them.
+          </h1>
+
+          <p className="mt-6 max-w-xl text-sm leading-7 text-zinc-400 md:text-base 2xl:max-w-2xl">
+            Focused on frontend systems, product quality, performance, and
+            developer experience. I care about craft, clarity, and shipping work
+            that makes a difference.
+          </p>
+        </div>
+      </section>
+
+      <section
+        id="writing"
+        className={`${sectionDivider} py-12 md:py-16 2xl:py-20`}
       >
-        O mnie
-        <svg
-          className="ml-2 h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17 8l4 4m0 0l-4 4m4-4H3"
-          />
-        </svg>
-      </Link>
+        <div className="mb-8 flex items-center justify-between gap-6">
+          <SectionLabel>Latest Writing</SectionLabel>
+          <span className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">
+            {String(sortedPosts.length).padStart(2, '0')} posts
+          </span>
+        </div>
 
-      <section className="mt-24">
-        <h2 className="mb-10 text-3xl font-bold text-white">Wybrane posty</h2>
-        <div className="grid gap-8">
+        <div className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
           {sortedPosts.map((post) => (
-            <PostItem key={post.slug} {...post} />
+            <Link
+              key={post.slug}
+              href={`/posts/${post.slug}`}
+              className="group grid items-center gap-3 py-5 text-zinc-300 transition-colors hover:text-zinc-50 md:grid-cols-[8.75rem_1fr_4rem] 2xl:grid-cols-[9.5rem_minmax(0,1fr)_5rem]"
+            >
+              <time className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">
+                {format(parseISO(post.date), 'MMM dd, yyyy')}
+              </time>
+              <span className="font-mono text-base leading-6">
+                {post.title}
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent opacity-80 transition-transform group-hover:translate-x-1 md:text-right">
+                Read
+              </span>
+            </Link>
           ))}
         </div>
       </section>
+
+      <section className={`${sectionDivider} py-12 md:py-16 2xl:py-20`}>
+        <SectionLabel>About</SectionLabel>
+
+        <div className="mt-6 grid gap-10 md:grid-cols-[14rem_1fr_18rem] md:items-start 2xl:grid-cols-[16rem_minmax(0,1fr)_22rem] 2xl:gap-16">
+          <div className="max-w-52">
+            <AboutVisual />
+          </div>
+
+          <div className="max-w-2xl text-sm leading-7 text-zinc-400">
+            <p className="font-medium text-zinc-300">
+              I am Oskar, a frontend engineer based in Warsaw, Poland.
+            </p>
+            <p>
+              I specialize in building fast, accessible, and delightful web
+              experiences. When I am not coding, I am writing, reading, or
+              probably tweaking my dotfiles.
+            </p>
+          </div>
+
+          <ul className="space-y-4 text-sm text-zinc-400">
+            {contactItems.map((item) => (
+              <li key={item.label} className="flex items-center gap-4">
+                <span
+                  className="h-4 w-4 shrink-0 border border-white/[0.16]"
+                  aria-hidden="true"
+                />
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="text-zinc-400 transition-colors hover:text-accent-light"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <span>{item.label}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <footer className="flex flex-col gap-5 py-9 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="mb-1 font-mono text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-zinc-200">
+            Oskar Puchalski
+          </p>
+          <p className="mb-0">&copy; 2026 All rights reserved.</p>
+        </div>
+        <div className="flex gap-5">
+          <a href="https://github.com/mlodyoskar">GitHub</a>
+          <a href="mailto:hello@opuchalski.pl">Email</a>
+        </div>
+      </footer>
     </div>
   );
 }

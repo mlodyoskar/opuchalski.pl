@@ -12,7 +12,9 @@ export default defineConfig({
           slug: s.path(),
           date: s.isodate(),
           draft: s.boolean().default(false),
+          language: s.string().default('en'),
           image: s.string().optional(),
+          imageAlt: s.string().optional(),
           content: s.mdx(),
         })
         .transform((data) => ({

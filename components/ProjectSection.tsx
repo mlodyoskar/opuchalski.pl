@@ -35,7 +35,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
             <span className="font-mono text-sm text-gray-500">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <div className="h-px w-12 bg-gray-700"></div>
+            <div className="h-px w-12 bg-gray-700" aria-hidden="true"></div>
           </div>
 
           <h2 className="text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl">
@@ -72,6 +72,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -80,6 +81,9 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
+                <span className="ml-2 font-mono text-xs uppercase tracking-[0.16em] text-gray-500">
+                  New tab
+                </span>
               </a>
             )}
             {repo && (
@@ -91,6 +95,9 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
                 aria-label={`View Code for ${title} (opens in new tab)`}
               >
                 View Code
+                <span className="ml-2 font-mono text-xs uppercase tracking-[0.16em] text-gray-500">
+                  New tab
+                </span>
               </a>
             )}
           </div>
@@ -105,6 +112,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
                 className="h-32 w-32 opacity-20"
                 viewBox="0 0 100 100"
                 fill="currentColor"
+                aria-hidden="true"
               >
                 <rect x="20" y="20" width="60" height="60" rx="8" />
                 <circle cx="70" cy="30" r="10" className="text-gray-600" />

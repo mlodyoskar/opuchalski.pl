@@ -18,7 +18,7 @@ export default function PortfolioPage() {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full" lang="pl">
       <div className="border-b border-gray-800 py-24 md:py-32">
         <div className="container mx-auto px-4">
           <h1 className="mb-8 text-6xl font-bold tracking-tighter text-white md:text-9xl">
