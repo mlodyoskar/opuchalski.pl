@@ -112,7 +112,7 @@ export default async function HomePage() {
             <span className="h-px w-10 bg-accent" aria-hidden="true" />
           </div>
 
-          <h1 className="mb-0 max-w-2xl font-mono text-3xl font-normal leading-[1.4] tracking-normal text-zinc-50 sm:text-4xl md:text-5xl 2xl:max-w-3xl">
+          <h1 className="mb-0 max-w-2xl font-mono text-3xl font-normal leading-[1.5] tracking-normal text-zinc-50 sm:text-4xl md:text-5xl 2xl:max-w-3xl">
             I build products and write about building them.
           </h1>
 
