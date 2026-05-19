@@ -8,7 +8,7 @@ const gaTrackingId = process.env.GA_TRACKING_ID;
 export const metadata: Metadata = {
   title: 'Oskar Puchalski',
   description:
-    'Frontend and product engineer based in Warsaw. I build fast web products and write about the craft behind them.',
+    'Frontend and product engineer based in Poland. I build fast web products and write about the craft behind them.',
 };
 
 export default function RootLayout({
