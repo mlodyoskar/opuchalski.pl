@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 import { posts } from '@/velite';
 
 const contactItems = [
-  { label: 'Based in Warsaw, Poland' },
+  { label: 'Based in Poland' },
   { label: 'Available for freelance' },
   { label: 'hello@opuchalski.pl', href: 'mailto:hello@opuchalski.pl' },
   { label: '@mlodyoskar', href: 'https://github.com/mlodyoskar' },
@@ -101,7 +101,7 @@ export default async function HomePage() {
 
           <div className="max-w-2xl text-sm leading-7 text-zinc-400">
             <p className="font-medium text-zinc-300">
-              I am Oskar, a frontend engineer based in Warsaw, Poland.
+              I am Oskar, a frontend engineer based in Poland.
             </p>
             <p>
               I specialize in building fast, accessible, and delightful web
