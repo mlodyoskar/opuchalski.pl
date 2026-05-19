@@ -5,8 +5,10 @@ import { posts } from '@/velite';
 
 const contactItems = [
   { label: 'Based in Poland' },
-  { label: 'Available for freelance' },
-  { label: 'hello@opuchalski.pl', href: 'mailto:hello@opuchalski.pl' },
+  {
+    label: 'oskarpuchalski17@gmail.com',
+    href: 'mailto:oskarpuchalski17@gmail.com',
+  },
   { label: '@mlodyoskar', href: 'https://github.com/mlodyoskar' },
 ];
 
@@ -105,8 +107,8 @@ export default async function HomePage() {
             </p>
             <p>
               I specialize in building fast, accessible, and delightful web
-              experiences. When I am not coding, I am writing, reading, or
-              probably tweaking my dotfiles.
+              experiences. When I am not coding, I am either reading, writing,
+              or running long distances.
             </p>
           </div>
 
@@ -142,7 +144,7 @@ export default async function HomePage() {
         </div>
         <div className="flex gap-5">
           <a href="https://github.com/mlodyoskar">GitHub</a>
-          <a href="mailto:hello@opuchalski.pl">Email</a>
+          <a href="mailto:oskarpuchalski17@gmail.com">Email</a>
         </div>
       </footer>
     </div>
