@@ -21,6 +21,9 @@ class VeliteWebpackPlugin {
 /** @type {import('next').NextConfig} */
 module.exports = {
   turbopack: {},
+  async rewrites() {
+    return [{ source: '/cv-html', destination: '/cv.html' }];
+  },
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin({}));
     return config;

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oskar Puchalski - CV</title>
+    <meta
+      name="description"
+      content="CV of Oskar Puchalski, Product-minded Frontend Engineer focused on developer tools, AI-assisted engineering, data-heavy UX and modern TypeScript products."
+    />
+    <style>
+      :root {
+        --ink: #000000;
+        --muted: #333333;
+        --soft: #555555;
+        --line: #c8c8c8;
+        --page: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #ffffff;
+        color: var(--ink);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system,
+          BlinkMacSystemFont, sans-serif;
+        font-size: 13.4px;
+        line-height: 1.34;
+      }
+
+      body {
+        margin: 0;
+        padding: 28px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--ink);
+        text-decoration: underline;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        padding: 14mm 16mm 13mm;
+        background: var(--page);
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: end;
+        padding-bottom: 11px;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        color: var(--ink);
+        font-size: 29px;
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .role {
+        margin-top: 6px;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .contact {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.55;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .summary {
+        margin-top: 13px;
+        font-size: 12.7px;
+        line-height: 1.38;
+      }
+
+      main {
+        margin-top: 15px;
+      }
+
+      section + section {
+        margin-top: 14px;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      h2::after {
+        content: "";
+        display: block;
+        height: 1px;
+        flex: 1;
+        background: var(--line);
+      }
+
+      .item {
+        margin-top: 8px;
+      }
+
+      .item-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: baseline;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 13.8px;
+        line-height: 1.18;
+      }
+
+      .meta {
+        color: var(--soft);
+        font-size: 11px;
+        line-height: 1.3;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .context {
+        margin-top: 5px;
+        color: var(--ink);
+        font-size: 11.8px;
+      }
+
+      ul {
+        margin: 6px 0 0;
+        padding-left: 17px;
+      }
+
+      li {
+        margin: 2.7px 0;
+        padding-left: 1px;
+        font-size: 11.65px;
+      }
+
+      li::marker {
+        color: var(--ink);
+      }
+
+      strong {
+        font-weight: 760;
+      }
+
+      .focus-line {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 11.3px;
+        line-height: 1.35;
+      }
+
+      .stack {
+        margin-top: 8px;
+        color: var(--ink);
+        font-size: 11.5px;
+        font-weight: 650;
+        line-height: 1.35;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: 118px minmax(0, 1fr);
+        row-gap: 5px;
+        column-gap: 12px;
+        margin-top: 10px;
+        font-size: 11.4px;
+      }
+
+      .skills dt {
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .skills dd {
+        margin: 0;
+        color: var(--ink);
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html {
+          background: #ffffff;
+          font-size: 14px;
+        }
+
+        body {
+          padding: 0;
+        }
+
+        .page {
+          width: 210mm;
+          min-height: 297mm;
+          padding: 14mm 16mm 13mm;
+          box-shadow: none;
+        }
+
+        a {
+          color: inherit;
+        }
+      }
+
+      @media (max-width: 820px) {
+        body {
+          padding: 0;
+        }
+
+        .page {
+          width: 100%;
+          min-height: 0;
+          padding: 24px;
+          box-shadow: none;
+        }
+
+        header,
+        .item-header {
+          grid-template-columns: 1fr;
+        }
+
+        .contact,
+        .meta {
+          text-align: left;
+          white-space: normal;
+        }
+
+        .skills {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="page">
+      <header>
+        <div>
+          <h1>Oskar Puchalski</h1>
+          <p class="role">
+            Product Engineer, Frontend — React, TypeScript, AI + Developer Tools
+          </p>
+        </div>
+        <address class="contact">
+          Bydgoszcz, Poland / Remote EU<br />
+          <a href="mailto:oskarpuchalski17@gmail.com"
+            >oskarpuchalski17@gmail.com</a
+          >
+          · <a href="tel:+48887042739">+48 887 042 739</a><br />
+          <a href="https://www.linkedin.com/in/oskarpuchalski"
+            >linkedin.com/in/oskarpuchalski</a
+          ><br />
+          <a href="https://github.com/mlodyoskar">github.com/mlodyoskar</a> ·
+          <a href="https://www.opuchalski.pl">opuchalski.pl</a> ·
+          <a href="https://ctcatlas.org/pl/">ctcatlas.org/pl</a>
+        </address>
+      </header>
+
+      <p class="summary">
+        Product engineer who cares about impact over cleverness — I'm drawn to
+        problems where frontend craft, system thinking and user experience
+        intersect. I enjoy owning things end to end, from architecture decisions
+        to shipping, and sharing what I learn along the way. Currently focused
+        on developer tools, AI-assisted workflows and TypeScript products built
+        to last.
+      </p>
+
+      <p class="stack">
+        React · TypeScript · Next.js · Astro · TanStack · Vercel AI SDK ·
+        Mastra · Cloudflare · Storybook · Redux
+      </p>
+
+      <p class="focus-line">
+        Best fit: product engineering roles where frontend craft, AI workflows,
+        and shipping speed matter.
+      </p>
+
+      <main>
+        <section aria-labelledby="experience">
+          <h2 id="experience">Experience</h2>
+
+          <div class="item">
+            <div class="item-header">
+              <h3>Frontend Developer — Panowie Programisci</h3>
+              <p class="meta">Feb 2024 - Present · Poland / Remote</p>
+            </div>
+            <ul>
+              <li>
+                Led a multi-month migration of the core table component across
+                two teams, replacing a monolithic component with 25+ props with
+                a composable TanStack-based API I designed, while handling edge
+                cases and accessibility across 80+ affected views.
+              </li>
+              <li>
+                Built a Cloudflare Worker for multitenant frontend deployment,
+                enabling a single codebase to serve multiple clients with
+                per-tenant customization.
+              </li>
+              <li>
+                Led the team's AI adoption: surveyed engineers on current
+                usage, ran internal training sessions on AI-assisted coding, and
+                shipped an agentic school assistant built with
+                <strong>Vercel AI SDK</strong> and <strong>Mastra</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-header">
+              <h3>Frontend Developer — Systell</h3>
+              <p class="meta">Aug 2022 - Feb 2024 · Poland / Remote</p>
+            </div>
+            <p class="context">
+              Worked on one of the largest contact center platforms in Poland,
+              used in operational business environments.
+            </p>
+            <ul>
+              <li>
+                Built a CSV import feature for large client datasets, including
+                a column-mapping UI that let admins match spreadsheet fields to
+                product fields before confirming the import.
+              </li>
+              <li>
+                Shipped production features on one of the largest contact
+                center platforms in Poland, serving thousands of agents daily
+                across <strong>React, TypeScript, Redux and Storybook</strong>.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="selected-work">
+          <h2 id="selected-work">Selected Work</h2>
+
+          <div class="item">
+            <div class="item-header">
+              <h3>
+                CTC Atlas — Research/data platform for circulating tumor cells
+              </h3>
+              <p class="meta">
+                Astro · Strapi · Cloudflare · VPS · SEO/analytics
+              </p>
+            </div>
+            <p class="context">
+              Case study:
+              <a href="https://www.opuchalski.pl/posts/building-ctc-atlas"
+                >opuchalski.pl/posts/building-ctc-atlas</a
+              >
+            </p>
+            <p class="context">
+              Built the technical side of an open-access cancer research
+              platform for the Medical University of Gdansk / UG and GUMed
+              research ecosystem, working from an externally provided UI design.
+            </p>
+            <ul>
+              <li>
+                Owned the technical delivery end to end: architecture, Astro
+                frontend, Strapi CMS integration, deployment on VPS, Cloudflare
+                setup, analytics, SEO and client communication.
+              </li>
+              <li>
+                Built a fast public atlas covering 200+ analyzed circulating
+                tumor cells with instant filtering across 15 biological and
+                clinical parameters, turning dense scientific data into a usable
+                research interface.
+              </li>
+              <li>
+                Built an interactive molecular calculator with statistical
+                analysis (Mann-Whitney) and data visualization, giving
+                researchers tools to compare biological markers across cancer
+                types.
+              </li>
+              <li>
+                Achieved perfect Lighthouse scores (100/100/100/100) with 0.4s
+                FCP/LCP and 0ms TBT, shipped to real researchers and referenced
+                by Polish medical publications including Rynek Zdrowia and
+                Medonet.
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </article>
+  </body>
+</html>
