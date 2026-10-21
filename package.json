@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "type-check": "velite build --clean && next typegen && tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "cv:pdf": "node scripts/cv-pdf.mjs"
   },
   "husky": {
     "hooks": {
@@ -42,6 +43,7 @@
     "husky": "^8.0.1",
     "knip": "^5.70.1",
     "lint-staged": "^13.0.3",
+    "playwright": "^1.64.1",
     "postcss": "^8.5.14",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.4.19",
