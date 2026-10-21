@@ -62,6 +62,10 @@ main{margin-top:20px}
 h2{display:flex;align-items:center;gap:10px;font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--soft)}
 h2::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
 h2::after{content:"";flex:1;height:1px;background:var(--line)}
+section+section{margin-top:18px}
+.skills{display:grid;grid-template-columns:110px minmax(0,1fr);row-gap:4px;column-gap:12px;margin:10px 0 0;font-size:12.1px}
+.skills dt{font-weight:600;color:var(--ink)}
+.skills dd{margin:0;color:#262626}
 h3{font-size:14.5px;font-weight:600;letter-spacing:-.02em}
 .meta{font-family:"Geist Mono",monospace;font-size:10.2px;color:var(--soft)}
 .context{font-size:12.1px;color:var(--muted)}
@@ -78,7 +82,7 @@ strong{font-weight:600;color:var(--ink)}
         <div>
           <h1>Oskar Puchalski</h1>
           <p class="role">
-            Product Engineer, Frontend — TypeScript, AI Agents, React
+            Product Engineer — TypeScript, AI Agents, React
           </p>
         </div>
         <address class="contact">
@@ -95,12 +99,10 @@ strong{font-weight:600;color:var(--ink)}
       <p class="summary"> I build AI agents that do real work inside existing products. I own things end to end, from agent architecture and evals to the interface people use every day, and I always look for the biggest lever to make my clients' work faster and better. Before agents, I spent nearly four years building data-heavy React and TypeScript products. 
       </p>
 
-      <p class="focus-line">
-        Best fit: product engineering roles building AI agents and TypeScript products.
-      </p>
-
       <main>
-        <section aria-label="Experience">
+        <section aria-labelledby="experience">
+          <h2 id="experience">Experience</h2>
+
 
           <div class="item">
             <div class="item-header">
@@ -113,7 +115,7 @@ strong{font-weight:600;color:var(--ink)}
             </p>
             <ul>
               <li>
-                Owned it end to end, from the first idea and research through
+                Took it from the first idea and research through
                 implementation, production and observability.
               </li>
               <li>
@@ -127,7 +129,7 @@ strong{font-weight:600;color:var(--ink)}
                 quickly and to a high standard.
               </li>
               <li>
-                Made agent quality measurable with an eval harness (tool-selection
+                Built an eval harness (tool-selection
                 suites and LLM-as-judge scorers) that runs on every PR, so prompt
                 and model changes ship only when evals pass.
               </li>
@@ -181,12 +183,22 @@ strong{font-weight:600;color:var(--ink)}
                 product fields before confirming the import.
               </li>
               <li>
-                Shipped production features on one of the largest contact
-                center platforms in Poland, serving thousands of agents daily
-                across <strong>React, TypeScript, Redux and Storybook</strong>.
+                Shipped production features used by thousands of agents daily, built
+                with <strong>React, TypeScript, Redux and Storybook</strong>.
               </li>
             </ul>
           </div>
+        </section>
+        <section aria-labelledby="skills">
+          <h2 id="skills">Skills</h2>
+          <dl class="skills">
+            <dt>AI</dt>
+            <dd>Mastra, Vercel AI SDK, tool calling, LLM evals, OpenRouter, PostHog</dd>
+            <dt>Frontend</dt>
+            <dd>TypeScript, React, Next.js, TanStack, Storybook, Redux, accessibility</dd>
+            <dt>Backend &amp; infra</dt>
+            <dd>Node.js, PostgreSQL, Cloudflare Workers</dd>
+          </dl>
         </section>
       </main>
     </article>
