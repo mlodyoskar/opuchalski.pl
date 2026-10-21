@@ -59,13 +59,7 @@ h1{font-size:34px;font-weight:600;line-height:1;letter-spacing:-.045em}
 .stack{margin-top:11px;font-family:"Geist Mono",monospace;font-size:10.2px;font-weight:500;color:var(--ink);word-spacing:-.15em}
 .focus-line{margin-top:8px;font-size:11.4px;color:var(--soft)}
 main{margin-top:20px}
-h2{display:flex;align-items:center;gap:10px;font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--soft)}
-h2::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
-h2::after{content:"";flex:1;height:1px;background:var(--line)}
-section+section{margin-top:18px}
-.skills{display:grid;grid-template-columns:110px minmax(0,1fr);row-gap:4px;column-gap:12px;margin:10px 0 0;font-size:12.1px}
-.skills dt{font-weight:600;color:var(--ink)}
-.skills dd{margin:0;color:#262626}
+h2{font-family:"Geist Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--soft)}
 h3{font-size:14.5px;font-weight:600;letter-spacing:-.02em}
 .meta{font-family:"Geist Mono",monospace;font-size:10.2px;color:var(--soft)}
 .context{font-size:12.1px;color:var(--muted)}
@@ -188,17 +182,6 @@ strong{font-weight:600;color:var(--ink)}
               </li>
             </ul>
           </div>
-        </section>
-        <section aria-labelledby="skills">
-          <h2 id="skills">Skills</h2>
-          <dl class="skills">
-            <dt>AI</dt>
-            <dd>Mastra, Vercel AI SDK, tool calling, LLM evals, OpenRouter, PostHog</dd>
-            <dt>Frontend</dt>
-            <dd>TypeScript, React, Next.js, TanStack, Storybook, Redux, accessibility</dd>
-            <dt>Backend &amp; infra</dt>
-            <dd>Node.js, PostgreSQL, Cloudflare Workers</dd>
-          </dl>
         </section>
       </main>
     </article>
