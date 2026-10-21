@@ -15,7 +15,7 @@ My personal blog is a platform where I share my thoughts and ideas about various
 - Source: `public/cv.html` (served at `/cv-html`)
 - PDF: `public/CV_Oskar_Puchalski.pdf` (served at `/cv`)
 
-After editing the HTML, regenerate the PDF with `pnpm cv:pdf` (needs Google Chrome on macOS).
+After editing the HTML, regenerate the PDF with `pnpm cv:pdf`. The first time, install the browser it uses with `pnpm exec playwright install chromium`.
 
 ## Roadmap 🗺️
 - [ ] Add reading time for article

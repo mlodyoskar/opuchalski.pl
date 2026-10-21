@@ -11,7 +11,7 @@
     "type-check": "velite build --clean && next typegen && tsc --pretty --noEmit",
     "format": "prettier --write .",
     "knip": "knip",
-    "cv:pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=public/CV_Oskar_Puchalski.pdf \"file://$PWD/public/cv.html\""
+    "cv:pdf": "node scripts/cv-pdf.mjs"
   },
   "husky": {
     "hooks": {
@@ -43,6 +43,7 @@
     "husky": "^8.0.1",
     "knip": "^5.70.1",
     "lint-staged": "^13.0.3",
+    "playwright": "^1.64.1",
     "postcss": "^8.5.14",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.4.19",
