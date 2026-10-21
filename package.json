@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "type-check": "velite build --clean && next typegen && tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "cv:pdf": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=public/CV_Oskar_Puchalski.pdf \"file://$PWD/public/cv.html\""
   },
   "husky": {
     "hooks": {
